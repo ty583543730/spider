@@ -1,0 +1,2142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <script>"use strict";
+        var __JS_RETRY__ = {};
+
+        function __retryPlugin(event) {
+            try {
+                var getRetryUrl = function getRetryUrl(src) {
+                    var retryPublicPath = "//fudao.qq.com/pc/";
+                    var publicPath = "//7.url.cn/fudao/pc/";
+                    if (retryPublicPath) {
+                        retryPublicPath += "/";
+                        retryPublicPath = retryPublicPath.replace(/\/\/$/, "/")
+                    }
+                    var value = src.replace(/^https?:/, "").replace(publicPath.replace(/^https?:/, ""), "").replace(/^\//, "");
+                    return retryPublicPath + value
+                };// 修复部分浏览器this.tagName获取失败的问题
+                this.onload = this.onerror = null;
+                var JS_SUCC_MSID = "33614185";
+                var JS_FAIL_MSID = "33614186";
+                var CSS_SUCC_MSID = "33614187";
+                var CSS_FAIL_MSID = "33614188";
+                var JS_RETRY_SUCC_MSID = "33614189";
+                var JS_RETRY_FAIL_MSID = "33614190";
+                var CSS_RETRY_SUCC_MSID = "33614191";
+                var CSS_RETRY_FAIL_MSID = "33614192";
+                var BADJS_LEVEL = 2;
+                var report = function report(data) {
+                    setTimeout(function () {
+                        window.BJ_REPORT && window.BJ_REPORT.report(data)
+                    }, 2000)
+                };
+                var isRetry = this.hasAttribute("retry");// 只有异步的js走这个重试逻辑，同步的都是采用document.write
+                var isAsync = this.hasAttribute("isAsync");
+                var isStyle = this.tagName === "LINK";
+                var isError = event.type === "error" || event.type === "timeout";
+                var src = this.href || this.src;
+                var newSrc = getRetryUrl(src);
+                if (isError) {
+                    if (isRetry) {
+                        report({
+                            level: BADJS_LEVEL || 2,
+                            msg: this.tagName + " retry load fail: " + src,
+                            ext: {msid: isStyle ? CSS_RETRY_FAIL_MSID : JS_RETRY_FAIL_MSID}
+                        })
+                    } else {
+                        if (isStyle) {// link style 重新加载
+                            var link = document.createElement("link");
+                            link.rel = "stylesheet";
+                            link.href = newSrc;
+                            link.setAttribute("retry", "");
+                            link.setAttribute("onerror", "__retryPlugin.call(this,event)");
+                            link.setAttribute("onload", "__retryPlugin.call(this,event)");
+                            this.parentNode.insertBefore(link, this.nextSibling)
+                        } else if (isAsync) {// js 重新加载
+                            var head = document.getElementsByTagName("head")[0];
+                            var script = document.createElement("script");
+                            script.charset = "utf-8";
+                            script.timeout = 120;
+                            script.src = newSrc;
+                            if (script.src.indexOf(window.location.origin + "/") !== 0) {
+                                script.crossOrigin = "anonymous"
+                            }
+                            var _timeout_ = setTimeout(function () {
+                                script.onerror({type: "timeout", target: script})
+                            }, 120000);
+                            script.onerror = function (event) {
+                                script.onerror = script.onload = null;
+                                clearTimeout(_timeout_);
+                                report({
+                                    level: BADJS_LEVEL || 2,
+                                    msg: this.tagName + " retry load fail: " + this.src,
+                                    ext: {msid: JS_RETRY_SUCC_MSID}
+                                })
+                            };
+                            script.onload = function (event) {
+                                script.onerror = script.onload = null;
+                                clearTimeout(_timeout_);
+                                report({
+                                    level: BADJS_LEVEL || 2,
+                                    msg: this.tagName + " retry load success: " + this.src,
+                                    ext: {msid: JS_SUCC_MSID}
+                                })
+                            };
+                            head.appendChild(script)
+                        }
+                        report({
+                            level: BADJS_LEVEL || 2,
+                            msg: this.tagName + " load fail: " + src,
+                            ext: {msid: isStyle ? CSS_FAIL_MSID : JS_FAIL_MSID}
+                        })
+                    }
+                } else {
+                    if (isRetry) {
+                        report({
+                            level: BADJS_LEVEL || 2,
+                            msg: this.tagName + " retry load success: " + src,
+                            ext: {msid: isStyle ? CSS_RETRY_SUCC_MSID : JS_RETRY_SUCC_MSID}
+                        })
+                    } else {
+                        report({
+                            level: BADJS_LEVEL || 2,
+                            msg: this.tagName + " load success: " + src,
+                            ext: {msid: isStyle ? CSS_SUCC_MSID : JS_SUCC_MSID}
+                        })
+                    }
+                }
+            } catch (e) {
+            }
+        }</script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <script>var T = {pageStart: Date.now()}</script>
+    <meta name="format-detection" content="telephone=no">
+    <title>高二语文-2020春·高二语文目标211班（通用版）-腾讯企鹅辅导</title> <!--KEYWORDS_PLACEHOLDER-->
+    <meta name="keywords" content="高二语文课程，高二语文学习技巧，高二语文在线学习"/> <!--DESCRIPTION_PLACEHOLDER-->
+    <meta name="description" itemprop="description"
+          content="腾讯企鹅辅导-腾讯推出的针对初高中生的优质线上直播课平台，由各科一线名师在线进行直播课程辅导，并提供课程回放、习题练习、答疑等服务，让学习变得简单高效。">
+    <meta name="baidu-site-verification" content="qsr5yKPRY5">
+    <meta itemprop="name" content="腾讯企鹅辅导">
+    <meta itemprop="image"
+          content="http://pub.idqqimg.com/pc/misc/files/20190124/6f1c452573df4751864ff6f88d0409cb.png"/>
+    <link rel="dns-prefetch" href="//7.url.cn">
+    <link rel="dns-prefetch" href="//8.url.cn">
+    <link rel="dns-prefetch" href="//9.url.cn">
+    <link rel="shortcut icon" type="image/ico" href="//9.url.cn/fudao/pc/assets/images/favicon_d7caf9a.ico">
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            function n() {
+                var n = document.documentElement,
+                    e = n.getBoundingClientRect().width || window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+                    t = (540 <= e ? 540 : e) / 16;
+                n.style.fontSize = t + "px"
+            }
+
+            n(), window.onresize = n
+        })</script> <!--ignore-->
+    <style type="text/css">.clearfix::after, .clearfix::before {
+            content: '';
+            display: table
+        }
+
+        .clearfix::after {
+            clear: both
+        }
+
+        html {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-size: 14px;
+            font-family: PingFangSC-Light, 'Helvetica Neue', Helvetica, 'Microsoft Yahei', STHeiTi, Arial, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: #fff;
+            min-height: 100%
+        }
+
+        article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+            display: block
+        }
+
+        audio, canvas, progress, video {
+            display: inline-block
+        }
+
+        audio:not([controls]) {
+            display: none;
+            height: 0
+        }
+
+        progress {
+            vertical-align: baseline
+        }
+
+        [hidden], template {
+            display: none
+        }
+
+        a {
+            background: 0 0;
+            text-decoration: none;
+            color: #08c
+        }
+
+        a:active {
+            outline: 0
+        }
+
+        abbr[title] {
+            border-bottom: 1px dotted
+        }
+
+        b, strong {
+            font-weight: 700
+        }
+
+        dfn {
+            font-style: italic
+        }
+
+        mark {
+            background: #ff0;
+            color: #000
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub, sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle
+        }
+
+        svg:not(:root) {
+            overflow: hidden
+        }
+
+        pre {
+            overflow: auto;
+            white-space: pre;
+            white-space: pre-wrap;
+            word-wrap: break-word
+        }
+
+        code, kbd, pre, samp {
+            font-family: monospace, monospace;
+            font-size: 1em
+        }
+
+        button, input, optgroup, select, textarea {
+            color: inherit;
+            font: inherit;
+            margin: 0;
+            vertical-align: middle
+        }
+
+        button, input, select {
+            overflow: visible
+        }
+
+        button, select {
+            text-transform: none
+        }
+
+        button, html input[type=button], input[type=reset], input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer
+        }
+
+        [disabled] {
+            cursor: default
+        }
+
+        button::-moz-focus-inner, input::-moz-focus-inner {
+            border: 0;
+            padding: 0
+        }
+
+        input {
+            line-height: normal
+        }
+
+        input[type=checkbox], input[type=radio] {
+            box-sizing: border-box;
+            padding: 0
+        }
+
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        input[type=search] {
+            -webkit-appearance: textfield;
+            box-sizing: border-box
+        }
+
+        input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        fieldset {
+            border: 1px solid silver;
+            margin: 0 2px;
+            padding: .35em .625em .75em
+        }
+
+        legend {
+            border: 0;
+            padding: 0
+        }
+
+        textarea {
+            overflow: auto;
+            resize: vertical;
+            vertical-align: top
+        }
+
+        optgroup {
+            font-weight: 700
+        }
+
+        input, select, textarea {
+            outline: 0
+        }
+
+        input, textarea {
+            -webkit-user-modify: read-write-plaintext-only
+        }
+
+        input::-ms-clear, input::-ms-reveal {
+            display: none
+        }
+
+        input::-moz-placeholder, textarea::-moz-placeholder {
+            color: #999
+        }
+
+        input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+            color: #999
+        }
+
+        input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+            color: #999
+        }
+
+        .placeholder {
+            color: #999
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        td, th {
+            padding: 0
+        }
+
+        blockquote, figure, form, h1, h2, h3, h4, h5, h6, p {
+            margin: 0
+        }
+
+        dd, dl, li, ol, ul {
+            margin: 0;
+            padding: 0
+        }
+
+        ol, ul {
+            list-style: none outside none
+        }
+
+        h1, h2, h3 {
+            line-height: 2;
+            font-weight: 400
+        }
+
+        h1 {
+            font-size: 18px
+        }
+
+        h2 {
+            font-size: 16px
+        }
+
+        h3 {
+            font-size: 14px
+        }
+
+        i {
+            font-style: normal
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        .hide {
+            display: none
+        }</style> <!--ignore--> <!--STYLE_PLACEHOLDER-->
+    <style type="text/css">.ie-no-support-tips {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            line-height: 24px;
+            height: 24px;
+            font-size: 14px;
+            background: #f6f6cc;
+            color: #333;
+            z-index: 2000;
+            text-align: center
+        }</style>
+    <script>T.headerEnd = Date.now()</script>
+    <link href="//7.url.cn/fudao/pc/assets/css/5_b63f5905.css" rel="stylesheet" onerror="__retryPlugin.call(this,event)"
+          onload="__retryPlugin.call(this,event)">
+    <link href="//7.url.cn/fudao/pc/assets/css/course_8afd6c03.css" rel="stylesheet"
+          onerror="__retryPlugin.call(this,event)" onload="__retryPlugin.call(this,event)">
+    <script>window.__perfData = {"fastReactRenderTime": 7};</script>
+    <script>window.isSvr = true;</script>
+</head>
+<body> <!--[if lt IE 10]>
+<div class="ie-no-support-tips">
+    当前的浏览器版本过低，部分功能可能会受影响，请尽快升级哦(可以下载
+    <a target="_blank" rel="noopener noreferrer" href="http://browser.qq.com">
+        QQ浏览器 </a
+    >,
+    <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html"
+    >
+        Chrome
+    </a>
+    等)
+</div>
+<![endif]-->
+<script id="imweb-webpack-retry-head"></script>
+<div id="react-body">
+    <div id="sticky">
+        <div class="sticky-bar">
+            <header class="header">
+                <div class="header-inner"><a href="/"><img alt="logo" class="logo"
+                                                           src="//7.url.cn/fudao/pc/assets/images/logo_895f1d46.png"
+                                                           style="height:32px;width:auto"/></a>
+                    <nav class="header-nav"><a href="/" class="title">找课</a><a href="/pc/livelist.html"
+                                                                               class="title">上课</a><a href="/brand.html"
+                                                                                                      class="title">品牌优势</a><a
+                                href="/pc/download.html" class="title">客户端</a></nav>
+                    <div class="header-right">
+                        <div class="header-search-box" data-modid="search">
+                            <div class="input-box"><label><input type="text" value="" placeholder="搜索课程、老师"/></label>
+                                <div class="submit"><img class="icon"
+                                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAABWhJREFUeAHtWk1oXFUUvudNZpK0WSh2oUkjLfiDoIuAJrXJaECqTSulxcaF7qRkJyIFVyJZuBDRRZFugnTpwlRako5TiKVTZqY2oyCC+FuI1iY1Wm2RtEk6M+96zpTXue++jjP35w0V79u8c8979/vO/eb+vXOHMXc5BZwCTgGngFPAKeAUcAo4BZwC/0cFIO5Gj4zsvnvdr+7mADsY4/cDg17OeC/xor2E9hJaF4DzuU4vkSkUMlfijknEj02AwZGd+3zOXkWCNOesQyRtZAOwCmcs7wH7oFQ4eazRezb91gXYlh4brlb5u9iQ7SaBYmBnEwl441w+WzTBaVbXmgDj4+OJnxdX3scu/VozUpXnOEwObenrOTg9PV1Vqdfqu1YEGB3de9dKef1jxjmO8+iFjfgKB/xxj3l5DnxxQ8dGHPeMXa9c6wUOfT7z04yzvSjeQLQ2egDmepKdL+Zyx6/e9rmB01iAWuNvrJ/FCe6RaBxwlEHyzS+LMz9En0U9jw/veZjx8tuItT/6FL7rSXVuty2CkQDU7ReWVrLyL4+T2YLH4KX5YvZctCHNPUPDY9t8xj/CyXNr6G3sCVt7e8ZsDgcvRKBYoDEfaTyDM9DV/YRu4ykEqksYOHTOhELCIVbjDDnNCtoC0GwvT3gU8MCj/TtKp479aRYWY4RBWLIIxEncpvhBfW0BaKkLQOhO3R66u16Ympoqi34Tm7AIk7BFHJlbfKZqawlAmxx5nacxb+OXlxtAmIQt+ombYhB9uraWALTDCxPCUZMxH8aKlm5i44oiXNEYhIcKprIAtLfHpSMd4sClLlSOoyBxUAwUiymVsgBrjD8v7u1pk9PqOm8SLHEQV4BBMVAsQVn3riyA5/vh3R7u8HTJletJXJFYlAEZUxbAB9Yv8tD2VizHactcciw63MoCYDesfcsHZLS3D+y47zKXHIsOv7IAuBEJCRB82OiQq9aRueRYVPHofWUBUHVchutXubyOE3J7rggXB+X45Uh1AC6JIGWo3CeW47Rvw/WHKZ+yANjtat/yATF9zwd23HeZC7fI7ReAEphiQ2vJDNERox3l4t+Y0in3APzq+SxEipmcUDnOgsSFk0/OlE5ZgC4GJ7DrVQJiHBIDtUxO4IjpThzEJcKnIHlaLOvYygJQ3h6XgfDmp5bG0qFXqCNzADtdKMyGhqMC2q1XlQWgmpS3v4VQM/h+SmOFffZKN7HDecIE9w7ZYNASgA4tcPxhIrR+UQ5v8Jl999Q9dizCJGwRDQC+HXt2cFb06dpaAhAZHVqIpJTA5Ktrn0xMTCRFv4lNWIQpJUd5wmMTk5OTvgl2UDcRGKr3ixfO/9rX/yB9j4tdf8tvv//91OaHHptdXPh+VRVTfJ9++UtLf53Aie9p0c/AO1IqZA+HfAYF7R5AnHRiQ4cWIj8FzNdWvzCZE6guYUQaj0R4iLrzydE9D4icJrbxPr59ByP1ZuL3yGJHKjn6eW7mfN2rZxkLQLRtOBq7jOcPm8Qm2hLBigAUWEyHoxyX3Pc2JO996/qN5cO4GrxiWwRrAgSBWTseB/a1xxKvzxcztd0e5xyGhnd9aFsE6wIEQuj8QQLrcpxUi57nvVPKZzIBVnCPQ4TYBAiCptQ1ZW8pgUk5PEpj4exOWSX8pIBlbPMytvon+ouM152amz81g77Gl20RYhegcVP0n/yLCBc3pjoGcrnZy62iG+0DWiWx/R5uhfl88dMDeGR2RMTGnrX5WqX6suhrZv8nBaBGNRIBtfmlWaPF5y39e0uscCfZJAJeB4bSu370OX/O43CylM+276DmThLDxeIUcAo4BZwCTgGngFPAKeAUcAooKfAP8gMnAdxN2ZsAAAAASUVORK5CYII="
+                                                         alt=""/></div>
+                                <div class="search-btn"><img
+                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAABWhJREFUeAHtWk1oXFUUvudNZpK0WSh2oUkjLfiDoIuAJrXJaECqTSulxcaF7qRkJyIFVyJZuBDRRZFugnTpwlRako5TiKVTZqY2oyCC+FuI1iY1Wm2RtEk6M+96zpTXue++jjP35w0V79u8c8979/vO/eb+vXOHMXc5BZwCTgGngFPAKeAUcAo4BZwC/0cFIO5Gj4zsvnvdr+7mADsY4/cDg17OeC/xor2E9hJaF4DzuU4vkSkUMlfijknEj02AwZGd+3zOXkWCNOesQyRtZAOwCmcs7wH7oFQ4eazRezb91gXYlh4brlb5u9iQ7SaBYmBnEwl441w+WzTBaVbXmgDj4+OJnxdX3scu/VozUpXnOEwObenrOTg9PV1Vqdfqu1YEGB3de9dKef1jxjmO8+iFjfgKB/xxj3l5DnxxQ8dGHPeMXa9c6wUOfT7z04yzvSjeQLQ2egDmepKdL+Zyx6/e9rmB01iAWuNvrJ/FCe6RaBxwlEHyzS+LMz9En0U9jw/veZjx8tuItT/6FL7rSXVuty2CkQDU7ReWVrLyL4+T2YLH4KX5YvZctCHNPUPDY9t8xj/CyXNr6G3sCVt7e8ZsDgcvRKBYoDEfaTyDM9DV/YRu4ykEqksYOHTOhELCIVbjDDnNCtoC0GwvT3gU8MCj/TtKp479aRYWY4RBWLIIxEncpvhBfW0BaKkLQOhO3R66u16Ympoqi34Tm7AIk7BFHJlbfKZqawlAmxx5nacxb+OXlxtAmIQt+ombYhB9uraWALTDCxPCUZMxH8aKlm5i44oiXNEYhIcKprIAtLfHpSMd4sClLlSOoyBxUAwUiymVsgBrjD8v7u1pk9PqOm8SLHEQV4BBMVAsQVn3riyA5/vh3R7u8HTJletJXJFYlAEZUxbAB9Yv8tD2VizHactcciw63MoCYDesfcsHZLS3D+y47zKXHIsOv7IAuBEJCRB82OiQq9aRueRYVPHofWUBUHVchutXubyOE3J7rggXB+X45Uh1AC6JIGWo3CeW47Rvw/WHKZ+yANjtat/yATF9zwd23HeZC7fI7ReAEphiQ2vJDNERox3l4t+Y0in3APzq+SxEipmcUDnOgsSFk0/OlE5ZgC4GJ7DrVQJiHBIDtUxO4IjpThzEJcKnIHlaLOvYygJQ3h6XgfDmp5bG0qFXqCNzADtdKMyGhqMC2q1XlQWgmpS3v4VQM/h+SmOFffZKN7HDecIE9w7ZYNASgA4tcPxhIrR+UQ5v8Jl999Q9dizCJGwRDQC+HXt2cFb06dpaAhAZHVqIpJTA5Ktrn0xMTCRFv4lNWIQpJUd5wmMTk5OTvgl2UDcRGKr3ixfO/9rX/yB9j4tdf8tvv//91OaHHptdXPh+VRVTfJ9++UtLf53Aie9p0c/AO1IqZA+HfAYF7R5AnHRiQ4cWIj8FzNdWvzCZE6guYUQaj0R4iLrzydE9D4icJrbxPr59ByP1ZuL3yGJHKjn6eW7mfN2rZxkLQLRtOBq7jOcPm8Qm2hLBigAUWEyHoxyX3Pc2JO996/qN5cO4GrxiWwRrAgSBWTseB/a1xxKvzxcztd0e5xyGhnd9aFsE6wIEQuj8QQLrcpxUi57nvVPKZzIBVnCPQ4TYBAiCptQ1ZW8pgUk5PEpj4exOWSX8pIBlbPMytvon+ouM152amz81g77Gl20RYhegcVP0n/yLCBc3pjoGcrnZy62iG+0DWiWx/R5uhfl88dMDeGR2RMTGnrX5WqX6suhrZv8nBaBGNRIBtfmlWaPF5y39e0uscCfZJAJeB4bSu370OX/O43CylM+276DmThLDxeIUcAo4BZwCTgGngFPAKeAUcAooKfAP8gMnAdxN2ZsAAAAASUVORK5CYII="
+                                            alt=""/></div>
+                            </div>
+                        </div>
+                        <div class="loginBlock"></div>
+                    </div>
+                </div>
+            </header>
+            <div class="title-area--wrapper">
+                <div class="title-area">
+                    <div class="fixed-title"><h1 class="tt-name"><span class="tt-subject">语</span><span class="tt-word">2020春·高二语文目标211班（通用版）</span>
+                        </h1></div>
+                    <div>
+                        <div class="sale-info-container">
+                            <div class="inner">
+                                <div class="sale-info-wrap" data-modid="purchase_area">
+                                    <section class="freelesson-container" data-modid="audition">
+                                        <div class="freelesoon-cover-pic"><img
+                                                    src="//7.url.cn/fudao/pc/assets/images/yw-1_2a126974.jpg"/></div>
+                                        <div class="tryListenBlock">
+                                            <button class="tryListenBtn"><span class="playTriangleCtn"><i
+                                                            class="playTriangle"></i></span><span class="listenText">课程试听</span>
+                                            </button>
+                                        </div>
+                                        <div class="video-mask">
+                                            <div class="video-close-btn"></div>
+                                        </div>
+                                        <div class="video-wrap">
+                                            <div class="coverSection">
+                                                <div class="tryListenBlock hidden">
+                                                    <button class="tryListenBtn" style="color:rgb(0, 195, 65)"><span
+                                                                class="playTriangleCtn"><i class="playTriangle"
+                                                                                           style="border-left-color:rgb(0, 195, 65)"></i></span><span>试听</span>
+                                                    </button>
+                                                </div>
+                                                <div class="video" id="js-tc-video-container"></div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="sale-info ">
+                                        <div class="tt-price-wrap"><span class="tt-info-item tt-price-y">¥</span><span
+                                                    class="tt-info-item tt-price-integer">1120</span></div>
+                                        <div class="footerBtnWrap">
+                                            <button><span>立即报名</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div>
+            <section class="tt">
+                <div class="tt-inner"><h1 class="tt-name"><span class="tt-subject">语</span><span class="tt-word">2020春·高二语文目标211班（通用版）</span>
+                    </h1>
+                    <p id="ttTime" class="tt-time">2月23日-6月21日 每周日 10:30-12:40</p><a href="javascript:;"
+                                                                                     class="tt-service">直播上课<span
+                                class="tt-service-point"></span>无限回放<span class="tt-service-point"></span>1v1辅导<span
+                                class="tt-service-point"></span>精编讲义<span class="tt-service-point"></span>考试检测<span
+                                class="tt-service-point"></span>学习报告<span class="svg-icon"><svg viewBox="0 0 16 16"
+                                                                                                xmlns="http://www.w3.org/2000/svg"><path
+                                        d="m5 13a1 1 0 0 1 .293-.707l4.293-4.293-4.293-4.293a1 1 0 0 1 1.414-1.414l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1 -1.707-.707z"></path></svg></span></a>
+                </div>
+            </section>
+        </div>
+        <section class="teacherIntro"><h2 class="section-title">双师授课</h2>
+            <div class="teacherGroupList">
+                <div class="teacherGroupXScroll" style="transform:translateX(-0px)">
+                    <ul class="teacherList">
+                        <li class="teacherItem" data-modid="teacher" data-tdw="{&quot;teacher_uin&quot;:2074380064}">
+                            <img alt="//pub.idqqimg.com/pc/misc/files/20180508/f826679a1bb24085a7720f60a13f96ec.jpg"
+                                 class="headIcon"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAABGdBTUEAALGPC/xhBQAACelJREFUeAHlnc9rFVcUx1+eMTFqokQhpTQ0hOgTQazbgkJFcaUF27VQ3OhCN9W/onYTF+1GBNfWha5KJVAXbi0I4tMQrBGxGGNM1Jj4I/1+pu8+JpP5cefOj7yXXpjcO3fOPfec75x7zplfLx2VVSyzs7Pbq9XqvqWlpdqnT59qEqXW0dHxmfZ7Vfdqn40yp7459VE/035d4+rar2vcnb6+vimPahX+dJQ5p5TvmZubOyTFD6p9UHPvUZ1JBvFaEp+7qsfEa6y3t/em2vNl6ZVJeBshAej169cHVJ/Q9r3G9NmMy0AzKwCvaruyefPmW6oBuLBSGIACq1vA/aAldl7SDxemQTzjCS31nwTkZQG5EE/qdjR3AAVcj3zbKQl8Tu3P3cTKd5RkeSpZLshX/qp2rss7VwAF3FEJOir1h/KFIDdujwTgWQF5Iy+OuQA4Pz//5fv370cF3rG8BCuSj0C8vn79+jM9PT2Ps86TGUBF1ePyc5ckyNaswpQ8fkb+8aSi9rUs81ZdB8vaul69ejUq8H4Tj3YDD7W3Ijs6oIsrDk4WqAn7ZXk3VH/tOnErjdOSvi1LPKp6Oq1cqQF8+/btFx8+fPhd4O1OO1kr0wu8e52dnUc2btz4JI2cqQBUlK0JuD80wWCaSdqIdlJAHlaUrtvKbO0Dsbw1Dh6YDaIjuuYKoJj2s2yZwJZxG9MNNlxUv40OiRYo8LoaAWNN+bw4cKTz7obOidE5EUD5vQtiuCaibRxowWPojO7B/uB+bBBpJMnkef/bomT7u7hkOxJALs8WFxf/EnLtmCTnecJnurq69kZd9nVGzcS1bVngffz4saKTVZHz9jZdIVTYTFFqUZElVKiVq3mblKqsW7fOkBRZbxUWFzXBt2GThFpg467K9bABefUBmtKFysLCQkUCOrEFwO7u7oqS34puDjjxsB2kk3cs7C7OCgDlPLmfd0+Mh2yZp6EDsDdv3njApRmXRAuAunFa2bBhQxKp6/FHAnC3gFx2P3FFFFbgOK0ZhlxniRrH8pyenvY2QMy7YMUvX76svHjxwtmiE2QakmGdCtIss0BZX7cAnFCd251k8aro1r63BScvch9rZMNv5lXE66ki8rDqpgUss0CeYeQJHn4OqwDAIgqBhaXLFgwozPn8+XPPz/oDEnJwUpGNlYAfhpb9pAI2YOSna54eHeyQiY7r4LCfwLVtlqyNYGnmACiCBr6OiOwvAEU0VwpWeffunf+QF8XpADy2YCEY9fdbXb1NyBeOyAo9Jk0JhOwBMc0FPPwR/i545oNCp93X8qls2rQpcllikQDLxgnUzVIPUOZJkkV5nq04ww2s/mRAcwnrrJyw5RBHZywvSeA4HsFjALNt27ZUPg3rxKKw1qSC9aUAEAtuYuUBqI4ebTz0zlQADZ+XJ3gEAYAgcU5bGLtly5ZYEA1NGt5gBWaM8QBU5D2kduY3BmZmZrylk0aYJFoAyJoky2dF8uBYMAAlyQRWDcz+A1Bn4aDFoFgSc1URS5TyIFaXZmlFsY+yMpa5K3+DmRdEZI6ZACTSKoJHye/cTx4XV/C3pCC4DMCAHn8ZVrBifJ0/iScoAa5LMZh1SvHtYrDHhYkZgxJiaHZzqQEChaMK4E1NTTXnBRhSGIJNFChEZwMggLKfoewBO8npvZ/ndho0O9ZH3pV3SfJ7XE8HTxrpUzD/88vlD0SkQ1mK5u4Au041dmVhhO8LKpKFnxkbTJJNv6mjEvS4DACeWDYlo/V5PKR3raoJeTPUuRRhfQgTtQyNoH5rMn3UUf2GBssmcCTxN/RxtbDbxelwBhCfE2UJcRPbHEuyapZg0EcSFJKWPuDZJNc2MoJdp87EQJKwUcyMQ446nqU/6cRgQSTY+D1oAc4mn3NNW8J0ATt8oHmRO4wmtg8LLKoAjE0BuCSrs+HjQgN2VaHoBCBWa6uki3BYVZH8XWQKjgE7fKATgORhrks/KEjUPhG+xYsHoJOMAFh0IcLHpSVFz2/DHwucsyEM0iQ5+SC9yz4WXsQloossEWPmqhKyZQFE6LC7yxHKlN4NdgQRJwDLXFrcJmvFgAJ2WOA/LqeO5VVWYS4eEZThd9PoJLme4QOt38b0My8TQObF4gt85utXLU2bjx6r99OMMLRlA8i8gIglFpnAG/1samFXxwc6WaDNBEXQGBBbIUcEO+7G3FGjPIeWA6pYP48sCS6rsRJQAczArqqHKnysfDcHvUpnQYqDX1yl4HIX7AgioDlWuvY5TUh6A4hF3hkKE9Vg5gGoZdC2AKLcavhFg5kHoG5E3pQc+T9WCzt1BfbhF/W8tsAZmqxnG5g1nwvPyySvNg+3cYMnhABZZHABK23ekzTPAsFLHVfS4Cb6NOSl0pLiFAmiH6smgHoofUtaTpSqaYGTEaEBsYAy0cDKY90EUKguKbP+qYAJV40lIOZ9OwyMwMootWwdym9Yv+JL6tAql1RGmaiap3VJr4lEjfX3C7j4V3xFsCAQEz9vgmmRTtovdB5tIjPWmLWADRj5+SyzQA6IyOozB95LacV7dH7l/G0p7r03k+EJnt1nDpqIlOasf/K10GbFZHn5E0zAJohFM4j4D+ga74aIC/1SyT9fWW2e47hEZrAAkzA5QwGEUKaOFc6EDaKvnXygXwfe3krpD2eExRk/D387EkC9AvG3QvZJP/FaaZPacP1sU8BAWDyOoo0EkAEK/9dUXQwb3K4WiC6AZ5kfXmxgEAaB1xcLIBRa++fkA24HObQzgOjCMo7LItAZ3YN6B/cTARSjRZ0FfpSGLzjXVIm6c4OuDZ0T355KBBDExHBab3ceUXPSINjuFoge3IQNscJJdEVno2tcbQUgDPRS4hMxPaymB+JaABC9eNfaV7wf3kFXX19s0xpAuMgn1BXS+QWPNbOcSWsIKixbdEPHWMQCB1MByNjG2dmv5orAEuDdFrusJC1lfnxsfxrLM8qlBpCB+vxqularfaOzFpriGObtUKPDwMAAulj5vKBOK24mBAmS9h88eHBcZ/GStrb6eRQBNqPt5M6dO8l1nYuTBfpnQwD5jq/U107XztcVafdmBQ8cMlugH8yHDx8e1QX7qPqG/P0t1H6kN/nP7tixI/TGgIucuQKIAJOTkz16qHNaS/pH7eb24xUuyvnGPNVy/VlB4pfBwcEVt6R8dKmbuQNoJJA1dgtEfsTivLZh019mLdAmtPEM47Ksbtmd5LzkKAxAI6DA6xgfHz+gpX1CivCld585VkStOWY1x1Ut1SsjIyO3tN98AFTIfEUwjeLJ8lbiekgKFvLPCATWmD4ivJn3Mo3Sh/7CLTBu8nq9vl1K7xPNLoHKN3v8RuuAar5dMZua3pcEc9Si55Vk719hqL4v+jvKSXnDbFXKvywquUs37IaTAAAAAElFTkSuQmCC"/>
+                            <div class="teacherContent">
+                                <div class="caption"><p>授课老师<span class="colon">：</span>杨红子</p>
+                                    <div class="starRate"><span class="svg-icon starIcon"><svg version="1.1" id="图层_1"
+                                                                                               xmlns="http://www.w3.org/2000/svg"
+                                                                                               xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                               x="0px" y="0px"
+                                                                                               viewBox="0 0 12 12"
+                                                                                               style="enable-background:new 0 0 12 12;"
+                                                                                               xml:space="preserve"><style
+                                                        type="text/css"> .__3oyt1lI__st0 {
+                                                        fill: none;
+                                                    }
+
+                                                    .__3oyt1lI__st1 {
+                                                        fill: #FFFFFF;
+                                                    } </style><title>Icons / Info / Star</title><desc>Created with Sketch.</desc><g
+                                                        id="Icons-_x2F_-Info-_x2F_-Star_1_"><rect id="Rectangle"
+                                                                                                  class="__3oyt1lI__st0 "
+                                                                                                  width="12"
+                                                                                                  height="12"></rect><path
+                                                            id="Star" class="__3oyt1lI__st1 "
+                                                            d="M5.9,8.5L3.8,9.4c-0.2,0.1-0.4,0-0.5-0.2c0-0.1,0-0.1,0-0.2l0.2-2.3L2,4.9C1.8,4.7,1.8,4.5,2,4.3 c0.1,0,0.1-0.1,0.2-0.1l2.3-0.5l1.2-2C5.8,1.5,6,1.4,6.2,1.6c0.1,0,0.1,0.1,0.1,0.1l1.2,2l2.3,0.5c0.2,0,0.4,0.3,0.3,0.5 c0,0.1,0,0.1-0.1,0.2L8.5,6.6L8.7,9c0,0.2-0.1,0.4-0.4,0.4c-0.1,0-0.1,0-0.2,0L6.1,8.5C6,8.5,6,8.5,5.9,8.5z"></path></g></svg></span><span
+                                                class="txt">5.0</span></div>
+                                </div>
+                                <div class="labelWrap"><span class="label">北师大本硕</span><span
+                                            class="label">5年教龄</span><span class="label">语文解题达人</span></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="directory-container" data-modid="syllabus">
+            <div class="directory-content">
+                <div class="directory-content">
+                    <div><h2 class="section-title">课程大纲</h2>
+                        <ul class="infoList">
+                            <li class="listItem">
+                                <div class="listItemCaption hasLL"><span class="listNo">01</span>
+                                    <div class="listContent">
+                                        <div class="caption">【战争与和平】古诗词精讲:边塞军旅诗</div>
+                                        <div class="taskDetail">2月23日<!-- --> 周<!-- --> 日<!-- --> <!-- -->10:30<!-- -->
+                                            -<!-- --> 12:40<span class="dot-space"></span>杨红子
+                                        </div>
+                                        <span class="svg-icon iconLiveArrow "><svg viewBox="0 0 16 16"
+                                                                                   xmlns="http://www.w3.org/2000/svg"><path
+                                                        d="m13 5a1 1 0 0 0 -.707.293l-4.293 4.293-4.293-4.293a1 1 0 0 0 -1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0 -.707-1.707z"></path></svg></span>
+                                    </div>
+                                </div>
+                                <ul class="liveInfoList ">
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">家长会</div>
+                                            <div class="taskDetail">10:30<!-- --> -<!-- --> 10:45<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">【战争与和平】古诗词精讲:边塞军旅诗</div>
+                                            <div class="taskDetail">10:45<!-- --> -<!-- --> 12:30<span
+                                                        class="dot-space"></span>杨红子
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课后小班直播</div>
+                                            <div class="taskDetail">12:30<!-- --> -<!-- --> 12:40<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="listItem">
+                                <div class="listItemCaption hasLL"><span class="listNo">02</span>
+                                    <div class="listContent">
+                                        <div class="caption">【战争与和平】文言文精讲:经典人物传记（一）</div>
+                                        <div class="taskDetail">3月1日<!-- --> 周<!-- --> 日<!-- --> <!-- -->10:30<!-- --> -
+                                            <!-- --> 12:40<span class="dot-space"></span>杨红子
+                                        </div>
+                                        <span class="svg-icon iconLiveArrow "><svg viewBox="0 0 16 16"
+                                                                                   xmlns="http://www.w3.org/2000/svg"><path
+                                                        d="m13 5a1 1 0 0 0 -.707.293l-4.293 4.293-4.293-4.293a1 1 0 0 0 -1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0 -.707-1.707z"></path></svg></span>
+                                    </div>
+                                </div>
+                                <ul class="liveInfoList ">
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课前小班直播</div>
+                                            <div class="taskDetail">10:30<!-- --> -<!-- --> 10:45<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">【战争与和平】文言文精讲:经典人物传记（一）</div>
+                                            <div class="taskDetail">10:45<!-- --> -<!-- --> 12:30<span
+                                                        class="dot-space"></span>杨红子
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课后小班直播</div>
+                                            <div class="taskDetail">12:30<!-- --> -<!-- --> 12:40<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="listItem">
+                                <div class="listItemCaption hasLL"><span class="listNo">03</span>
+                                    <div class="listContent">
+                                        <div class="caption">【综合写作】高分作文核心语段</div>
+                                        <div class="taskDetail">3月8日<!-- --> 周<!-- --> 日<!-- --> <!-- -->10:30<!-- --> -
+                                            <!-- --> 12:40<span class="dot-space"></span>杨红子
+                                        </div>
+                                        <span class="svg-icon iconLiveArrow "><svg viewBox="0 0 16 16"
+                                                                                   xmlns="http://www.w3.org/2000/svg"><path
+                                                        d="m13 5a1 1 0 0 0 -.707.293l-4.293 4.293-4.293-4.293a1 1 0 0 0 -1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0 -.707-1.707z"></path></svg></span>
+                                    </div>
+                                </div>
+                                <ul class="liveInfoList ">
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课前小班直播</div>
+                                            <div class="taskDetail">10:30<!-- --> -<!-- --> 10:45<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">【综合写作】高分作文核心语段</div>
+                                            <div class="taskDetail">10:45<!-- --> -<!-- --> 12:30<span
+                                                        class="dot-space"></span>杨红子
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课后小班直播</div>
+                                            <div class="taskDetail">12:30<!-- --> -<!-- --> 12:40<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="listItem">
+                                <div class="listItemCaption hasLL"><span class="listNo">04</span>
+                                    <div class="listContent">
+                                        <div class="caption">【文采与思想】现代文精讲:文学文本（一）</div>
+                                        <div class="taskDetail">3月15日<!-- --> 周<!-- --> 日<!-- --> <!-- -->10:30<!-- -->
+                                            -<!-- --> 12:40<span class="dot-space"></span>杨红子
+                                        </div>
+                                        <span class="svg-icon iconLiveArrow "><svg viewBox="0 0 16 16"
+                                                                                   xmlns="http://www.w3.org/2000/svg"><path
+                                                        d="m13 5a1 1 0 0 0 -.707.293l-4.293 4.293-4.293-4.293a1 1 0 0 0 -1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0 -.707-1.707z"></path></svg></span>
+                                    </div>
+                                </div>
+                                <ul class="liveInfoList ">
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课前小班直播</div>
+                                            <div class="taskDetail">10:30<!-- --> -<!-- --> 10:45<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">【文采与思想】现代文精讲:文学文本（一）</div>
+                                            <div class="taskDetail">10:45<!-- --> -<!-- --> 12:30<span
+                                                        class="dot-space"></span>杨红子
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课后小班直播</div>
+                                            <div class="taskDetail">12:30<!-- --> -<!-- --> 12:40<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="listItem">
+                                <div class="listItemCaption hasLL"><span class="listNo">05</span>
+                                    <div class="listContent">
+                                        <div class="caption">【文采与思想】现代文精讲:文学文本（二）</div>
+                                        <div class="taskDetail">3月22日<!-- --> 周<!-- --> 日<!-- --> <!-- -->10:30<!-- -->
+                                            -<!-- --> 12:40<span class="dot-space"></span>杨红子
+                                        </div>
+                                        <span class="svg-icon iconLiveArrow "><svg viewBox="0 0 16 16"
+                                                                                   xmlns="http://www.w3.org/2000/svg"><path
+                                                        d="m13 5a1 1 0 0 0 -.707.293l-4.293 4.293-4.293-4.293a1 1 0 0 0 -1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0 -.707-1.707z"></path></svg></span>
+                                    </div>
+                                </div>
+                                <ul class="liveInfoList ">
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课前小班直播</div>
+                                            <div class="taskDetail">10:30<!-- --> -<!-- --> 10:45<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">【文采与思想】现代文精讲:文学文本（二）</div>
+                                            <div class="taskDetail">10:45<!-- --> -<!-- --> 12:30<span
+                                                        class="dot-space"></span>杨红子
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><span class="iconLiveBook"></span>
+                                        <div class="listContent">
+                                            <div class="liveCaption">课后小班直播</div>
+                                            <div class="taskDetail">12:30<!-- --> -<!-- --> 12:40<span
+                                                        class="dot-space"></span>辅导老师
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="directory-content-more" data-modid="all_sub_course"><span>查看全部<span
+                                class="em">19</span>节课</span><span class="svg-icon directory-more-icon"><svg
+                                viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path
+                                    d="m13 5a1 1 0 0 0 -.707.293l-4.293 4.293-4.293-4.293a1 1 0 0 0 -1.414 1.414l5 5a1 1 0 0 0 1.414 0l5-5a1 1 0 0 0 -.707-1.707z"></path></svg></span>
+                </div>
+            </div>
+        </section>
+        <div class="courseDetail" data-modid="detail"><h2 class="section-title">课程详情</h2>
+            <div class="detail"><p><img class="lazyload"
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                                        data-src="//p.qpic.cn/qqconadmin/0/657a9cbf6056484e903f9348ee0666ec/0"><img
+                            class="lazyload"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                            data-src="//p.qpic.cn/qqconadmin/0/3f2db3d123e94137847b58e8da80e98f/0"><img class="lazyload"
+                                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                                                                                                        data-src="//p.qpic.cn/qqconadmin/0/1aa72c6ac2f043fe9199ca8b0b5720c5/0"><img
+                            class="lazyload"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                            data-src="//p.qpic.cn/qqconadmin/0/cbb031c2817343a897b48310b5392acb/0"><img class="lazyload"
+                                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                                                                                                        data-src="//p.qpic.cn/qqconadmin/0/926256d701584fa3ac9a6cfb54df635b/0"><img
+                            class="lazyload"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                            data-src="//p.qpic.cn/qqconadmin/0/e02786224bec49c3a1f67a5b581149e6/0"><img class="lazyload"
+                                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                                                                                                        data-src="//p.qpic.cn/qqconadmin/0/0804326b51934006b4b0cc46b128663d/0"><img
+                            class="lazyload"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                            data-src="//p.qpic.cn/qqconadmin/0/cd6791ab30724f5189cf9c00b96d162a/0"><img class="lazyload"
+                                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                                                                                                        data-src="//p.qpic.cn/qqconadmin/0/59d9333da14a4170b1d68528035be0b4/0"><img
+                            class="lazyload"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAADUCAAAAACpY4fVAAAABGdBTUEAALGPC/xhBQAAA+dJREFUeNrt3emOokoAgNF5/wfDDXdwV9QnuQrdLqiTDCLXSs73q4M9yeSMU1QJlH+Oarw/CKBDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0AUduqBDhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3To/0u7xXQ0GA4nyTKD3oz4tBtd66UZ9E+3n7Si+1qTPfSPlpTJz7WX0D/XYVD2jsfT0Wm0iRfr9XqejNbQ6y7rlQaWaTGeb4e/RxLodZt37s07m8tLi2LU6Ryg1zy2xKX3+e7mxWV+aGVMr7lJaTif3706Ph0ZOpHW3Kpk3i0Or9Pi5JmdDm2h11y3hD7Nj85PPy3yn/rhvNGDQV+WJ4vF3Pw8zveLGXy0gV5z/TJ6MaoML0P5OrY4qrnNwzK0mKnselGvmKzvV9BrLn1An/3OJI/hFQj6w/o/Gh3DLRD09gN6K4P+2XZPPlscQ292ZZS3hd7sLD1fk2bQP9niGXrU20P/YOun6FG8h97k2ijoESYM9OwFetTZQv9YrVfqrRX0TxVHL5tDr7FZer0gtxu3X6o/uRqdpTPoVZf+8eLyedZhOXilPrn/c4fF+TehV/+8pXVzL0uWdp+r316+WP/8n4BeHf08Q0muw8xm8jDMvPhngf4W+nkVNN9fB4+7i0i3A9D89hXo76Kf3s/D6/t5c5nLxOubYeV+Wgn9ffTzMDO9rITS0rxllzyM9tBrQb8dZtKbGfr9sAK9bvTzabM4qya/V0mz0fPVKvT60M/36uanzmk+Oz8krz4ggF4n+mmQuU5Y+i/XqdDrRb/eQDeKoDeF/nvTyyKC3hz6zy27MfQG0Ys7GbcR9CbRpz/TRugNouen0gn0RtHz+6IH0BtF75x/oQe9efQudOjQoUOHDh06dOjQm673DnoHeqUG76DH0Cs1eQd9CL1S6TvoCfRKZa030HfQqzWqjj44Qq/Wpjr6CnrV5lXR0yP0yiXV0L9924Avf9Br2f139M7X7wL77U/XHea9f0Pvzr5/250AHmncPHmy7gV6exzEbrtBPEf6+GTdU/TBwrav9a6UZr2/o3eTcPYJCGiD49sn60ro7XE4mzIeQ9s/fTl8ht5fBrZlXXBfz5D27tG7AX4pRoDf/rKdtot7peOoPdkcAyzM7zla5TPD9eoQ5N/el0tBhy7o0AUduqBDF3To0AUduqBDF3Togg4duqBDF3Togg5d0KFDF3Togg5d0KELOnTogg5d0KELOnRBhw5d0KELOnRBhy7o0KELOnRBhy7o0AUdOnRBhy7o0FWp/wCGkuIm4w308AAAAABJRU5ErkJggg=="
+                            data-src="//p.qpic.cn/qqconadmin/0/477749043ce24a2090e71a1ed0b8a05b/0"></p></div>
+        </div>
+        <div class="notice" data-modid="purchase_note"><h2 class="section-title">购课须知</h2>
+            <ul class="noticeList">
+                <li class="noticeItem"><span class="notice-item-icon notice-item-icon-1"></span><h4 class="title">
+                        支持多平台上课</h4>
+                    <p class="desc"></p>
+                    <p class="desc"><span class="em"></span>电脑上课：访问 fudao.qq.com 即可上课</p>
+                    <p class="desc"><span class="em"></span>手机、iPad上课：在应用市场下载“腾讯企鹅辅导”App</p></li>
+                <li class="noticeItem"><span class="notice-item-icon notice-item-icon-2"></span><h4 class="title">
+                        什么时间上课？</h4>
+                    <p class="desc">课前30分钟就可以进入教室啦，同学就可以在聊天区发言，也可以和老师语音互动哦</p></li>
+                <li class="noticeItem"><span class="notice-item-icon notice-item-icon-3"></span><h4 class="title">
+                        错过直播怎么办？</h4>
+                    <p class="desc">直播课结束后，同学们即可无限次观看课程回放</p></li>
+                <li class="noticeItem"><span class="notice-item-icon notice-item-icon-4"></span><h4 class="title">
+                        如何了解孩子的学习？</h4>
+                    <p class="desc">家长可关注微信服务号“腾讯家长会”，绑定账号，动动手指即可查看孩子的学习报告，更好地了解孩子的学习情况，接收最新的学习干货和政策解读</p></li>
+                <li class="noticeItem"><span class="notice-item-icon notice-item-icon-5"></span><h4 class="title">
+                        如何付款，可以退款吗？</h4>
+                    <p class="desc">支持微信、QQ钱包等多种方式付款</p>
+                    <p class="desc"><span class="em">系统课：</span>购买后可免费试听首节，第二节课开始前支持退款；讲义已经寄出，需扣除50元讲义费；部分活动课程不可退款</p>
+                    <p class="desc"><span class="em">专题课：</span>单节专题课开课前支持退款，多节专题课第二节开始前支持退款；部分活动课程不可退款</p></li>
+                <li class="noticeItem"><span class="notice-item-icon notice-item-icon-6"></span><h4 class="title">
+                        遇到问题怎么办？</h4>
+                    <p class="desc"></p>
+                    <p class="desc"><span class="em"></span>点击首页右下角“客服”（iPad版为右上角），专属客服会在第一时间处理您的问题</p>
+                    <p class="desc"><span class="em"></span>在9:00-21:30期间可拨打客服热线400-8575-288，专属客服会第一时间接听您的来电</p></li>
+            </ul>
+        </div>
+        <ul class="side-block">
+            <li class="side-item side-item--top"><span class="svg-icon"><svg viewBox="0 0 32 33"
+                                                                             xmlns="http://www.w3.org/2000/svg"><path
+                                d="m26.707 22.707a1 1 0 0 1 -1.414 0l-9.293-9.293-9.293 9.293a1 1 0 1 1 -1.414-1.414l10-10a1 1 0 0 1 1.414 0l10 10a1 1 0 0 1 0 1.414z"
+                                fill="#99a7ba"></path></svg></span></li>
+            <li style="margin-bottom:16px"><a class="customer-button" target="_blank" rel="noopener noreferrer"
+                                              data-modid="contact"><i class="customer-button--icon"></i><span>咨询</span></a>
+            </li>
+        </ul>
+        <footer class="footer "><span class="text text-top">客服电话：<span class="contact_number">400-8575-288</span>（周一至周日 9:00-21:30）</span><span
+                    class="text">Copyright © <!-- -->2020<!-- --> Tencent. All Rights Reserved.</span><span
+                    class="text">腾讯公司 版权所有</span></footer>
+        <div></div>
+    </div>
+</div>
+<script>T.bodyEnd = Date.now()</script>
+<script>window.__initialState = {
+        "pageStatus": {"status": 2},
+        "common": {
+            "cid": 131106,
+            "reshelf": 0,
+            "price": 1120,
+            "sign_bgtime": 1572278400,
+            "sign_endtime": 1592495999,
+            "evaluate_info": {},
+            "feCourseStatus": 8,
+            "tid": 2000027723,
+            "notApply": false,
+            "isSystemCourse": true
+        },
+        "title": {
+            "title": "2020春·高二语文目标211班（通用版）",
+            "subjectShortName": "语",
+            "courseTimeDesc": "2月23日-6月21日 每周日 10:30-12:40",
+            "subject": 6001,
+            "grade": "5002"
+        },
+        "freeLesson": {
+            "vid": "https:\u002F\u002F1256304549.vod2.myqcloud.com\u002Fc67f29aevodtransgzp1256304549\u002Ffe48c0785285890795822882218\u002Fv.f30.mp4",
+            "cid": 131106,
+            "subject": "语"
+        },
+        "teacher": {
+            "teacher": [{
+                "name": "杨红子",
+                "pic": "http:\u002F\u002Fpub.idqqimg.com\u002Fpc\u002Fmisc\u002Ffiles\u002F20180508\u002Ff826679a1bb24085a7720f60a13f96ec.jpg",
+                "tid": 2074380064,
+                "desc": "擅长把高冷深奥的知识讲得亲切可感，把复杂繁琐的知识点讲得简单明了。",
+                "good_rate": "5.0",
+                "label": "北师大本硕&5年教龄&语文解题达人",
+                "exp": "[{\"icon\":\"http:\u002F\u002Fpub.idqqimg.com\u002Fpc\u002Fmisc\u002Ffiles\u002F20180508\u002F8e0144eace714d56b47a9f5ffb3df17c.png\",\"time_slot\":\"2006年-2013年\",\"title_main\":\"北师大本硕\",\"title_ext\":\"\"},{\"icon\":\"http:\u002F\u002Fpub.idqqimg.com\u002Fpc\u002Fmisc\u002Ffiles\u002F20180508\u002F80319367a0694f5e8a0ac3ef98551584.png\",\"time_slot\":\"2016年-2018年\",\"title_main\":\"某在线教育机构\",\"title_ext\":\"明星老师，覆盖学员50万\"}]",
+                "content": "",
+                "type": "teacher"
+            }]
+        },
+        "directory": [{
+            "title": "入学诊断考试",
+            "bgtime": 1579104000,
+            "endtime": 1593619199,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126920,
+            "cs_type": 2,
+            "exam_duration": 30,
+            "cs_room_type": 0,
+            "video_room_info": {}
+        }, {
+            "title": "【战争与和平】古诗词精讲:边塞军旅诗",
+            "bgtime": 1582425000,
+            "endtime": 1582432800,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126926,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "家长会",
+                    "bg_time": 1582425000000,
+                    "end_time": 1582425900000
+                }, {
+                    "title": "【战争与和平】古诗词精讲:边塞军旅诗",
+                    "bg_time": 1582425900000,
+                    "end_time": 1582432200000
+                }, {"title": "课后小班直播", "bg_time": 1582432200000, "end_time": 1582432800000}]
+            }
+        }, {
+            "title": "【战争与和平】文言文精讲:经典人物传记（一）",
+            "bgtime": 1583029800,
+            "endtime": 1583037600,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126932,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1583029800000,
+                    "end_time": 1583030700000
+                }, {
+                    "title": "【战争与和平】文言文精讲:经典人物传记（一）",
+                    "bg_time": 1583030700000,
+                    "end_time": 1583037000000
+                }, {"title": "课后小班直播", "bg_time": 1583037000000, "end_time": 1583037600000}]
+            }
+        }, {
+            "title": "【综合写作】高分作文核心语段",
+            "bgtime": 1583634600,
+            "endtime": 1583642400,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126937,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1583634600000,
+                    "end_time": 1583635500000
+                }, {"title": "【综合写作】高分作文核心语段", "bg_time": 1583635500000, "end_time": 1583641800000}, {
+                    "title": "课后小班直播",
+                    "bg_time": 1583641800000,
+                    "end_time": 1583642400000
+                }]
+            }
+        }, {
+            "title": "【文采与思想】现代文精讲:文学文本（一）",
+            "bgtime": 1584239400,
+            "endtime": 1584247200,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126942,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1584239400000,
+                    "end_time": 1584240300000
+                }, {
+                    "title": "【文采与思想】现代文精讲:文学文本（一）",
+                    "bg_time": 1584240300000,
+                    "end_time": 1584246600000
+                }, {"title": "课后小班直播", "bg_time": 1584246600000, "end_time": 1584247200000}]
+            }
+        }, {
+            "title": "【文采与思想】现代文精讲:文学文本（二）",
+            "bgtime": 1584844200,
+            "endtime": 1584852000,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126947,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1584844200000,
+                    "end_time": 1584845100000
+                }, {
+                    "title": "【文采与思想】现代文精讲:文学文本（二）",
+                    "bg_time": 1584845100000,
+                    "end_time": 1584851400000
+                }, {"title": "课后小班直播", "bg_time": 1584851400000, "end_time": 1584852000000}]
+            }
+        }, {
+            "title": "【豪放与婉约】文言文精讲:二十四史选读（四）",
+            "bgtime": 1585449000,
+            "endtime": 1585456800,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126952,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1585449000000,
+                    "end_time": 1585449900000
+                }, {
+                    "title": "【豪放与婉约】文言文精讲:二十四史选读（四）",
+                    "bg_time": 1585449900000,
+                    "end_time": 1585456200000
+                }, {"title": "课后小班直播", "bg_time": 1585456200000, "end_time": 1585456800000}]
+            }
+        }, {
+            "title": "【综合写作】经典素材积累与运用",
+            "bgtime": 1586658600,
+            "endtime": 1586666400,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126957,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1586658600000,
+                    "end_time": 1586659500000
+                }, {
+                    "title": "【综合写作】经典素材积累与运用",
+                    "bg_time": 1586659500000,
+                    "end_time": 1586665800000
+                }, {"title": "课后小班直播", "bg_time": 1586665800000, "end_time": 1586666400000}]
+            }
+        }, {
+            "title": "期中模拟考试",
+            "bgtime": 1587225600,
+            "endtime": 1593619199,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126962,
+            "cs_type": 2,
+            "exam_duration": 30,
+            "cs_room_type": 0,
+            "video_room_info": {}
+        }, {
+            "title": "【期中复习】期中冲刺与要点总结",
+            "bgtime": 1587263400,
+            "endtime": 1587271200,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126967,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1587263400000,
+                    "end_time": 1587264300000
+                }, {
+                    "title": "【期中复习】期中冲刺与要点总结",
+                    "bg_time": 1587264300000,
+                    "end_time": 1587270600000
+                }, {"title": "课后小班直播", "bg_time": 1587270600000, "end_time": 1587271200000}]
+            }
+        }, {
+            "title": "【豪放与婉约】古诗词精讲:送别怀人诗",
+            "bgtime": 1587868200,
+            "endtime": 1587876000,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126972,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "统考点评",
+                    "bg_time": 1587868200000,
+                    "end_time": 1587869100000
+                }, {
+                    "title": "【豪放与婉约】古诗词精讲:送别怀人诗",
+                    "bg_time": 1587869100000,
+                    "end_time": 1587875400000
+                }, {"title": "课后小班直播", "bg_time": 1587875400000, "end_time": 1587876000000}]
+            }
+        }, {
+            "title": "【个人与社会】文言文精讲:经典人物传记（二）",
+            "bgtime": 1589077800,
+            "endtime": 1589085600,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126977,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1589077800000,
+                    "end_time": 1589078700000
+                }, {
+                    "title": "【个人与社会】文言文精讲:经典人物传记（二）",
+                    "bg_time": 1589078700000,
+                    "end_time": 1589085000000
+                }, {"title": "课后小班直播", "bg_time": 1589085000000, "end_time": 1589085600000}]
+            }
+        }, {
+            "title": "【个人与社会】现代文精讲:论述类文本",
+            "bgtime": 1589682600,
+            "endtime": 1589690400,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126982,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1589682600000,
+                    "end_time": 1589683500000
+                }, {
+                    "title": "【个人与社会】现代文精讲:论述类文本",
+                    "bg_time": 1589683500000,
+                    "end_time": 1589689800000
+                }, {"title": "课后小班直播", "bg_time": 1589689800000, "end_time": 1589690400000}]
+            }
+        }, {
+            "title": "【高雅与通俗】现代文精讲:实用类文本",
+            "bgtime": 1590287400,
+            "endtime": 1590295200,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126986,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1590287400000,
+                    "end_time": 1590288300000
+                }, {
+                    "title": "【高雅与通俗】现代文精讲:实用类文本",
+                    "bg_time": 1590288300000,
+                    "end_time": 1590294600000
+                }, {"title": "课后小班直播", "bg_time": 1590294600000, "end_time": 1590295200000}]
+            }
+        }, {
+            "title": "【高雅与通俗】古诗词精讲:诗歌中的手法",
+            "bgtime": 1590892200,
+            "endtime": 1590900000,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126990,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1590892200000,
+                    "end_time": 1590893100000
+                }, {
+                    "title": "【高雅与通俗】古诗词精讲:诗歌中的手法",
+                    "bg_time": 1590893100000,
+                    "end_time": 1590899400000
+                }, {"title": "课后小班直播", "bg_time": 1590899400000, "end_time": 1590900000000}]
+            }
+        }, {
+            "title": "期末结课考试",
+            "bgtime": 1591459200,
+            "endtime": 1593619199,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126993,
+            "cs_type": 2,
+            "exam_duration": 60,
+            "cs_room_type": 0,
+            "video_room_info": {}
+        }, {
+            "title": "【语言运用】必考题型梳理",
+            "bgtime": 1591497000,
+            "endtime": 1591504800,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126996,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1591497000000,
+                    "end_time": 1591497900000
+                }, {"title": "【语言运用】必考题型梳理", "bg_time": 1591497900000, "end_time": 1591504200000}, {
+                    "title": "课后小班直播",
+                    "bg_time": 1591504200000,
+                    "end_time": 1591504800000
+                }]
+            }
+        }, {
+            "title": "【综合写作】作文整体布局",
+            "bgtime": 1592101800,
+            "endtime": 1592109600,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126997,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1592101800000,
+                    "end_time": 1592102700000
+                }, {"title": "【综合写作】作文整体布局", "bg_time": 1592102700000, "end_time": 1592109000000}, {
+                    "title": "课后小班直播",
+                    "bg_time": 1592109000000,
+                    "end_time": 1592109600000
+                }]
+            }
+        }, {
+            "title": "【期末复习】期末冲刺与要点总结",
+            "bgtime": 1592706600,
+            "endtime": 1592714400,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126998,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "结业考点评",
+                    "bg_time": 1592706600000,
+                    "end_time": 1592707500000
+                }, {"title": "【期末复习】期末冲刺与要点总结", "bg_time": 1592707500000, "end_time": 1592713800000}, {
+                    "title": "结业典礼",
+                    "bg_time": 1592713800000,
+                    "end_time": 1592714400000
+                }]
+            }
+        }],
+        "detail": {"desc": "\u003Cp\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F657a9cbf6056484e903f9348ee0666ec\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F3f2db3d123e94137847b58e8da80e98f\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F1aa72c6ac2f043fe9199ca8b0b5720c5\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002Fcbb031c2817343a897b48310b5392acb\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F926256d701584fa3ac9a6cfb54df635b\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002Fe02786224bec49c3a1f67a5b581149e6\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F0804326b51934006b4b0cc46b128663d\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002Fcd6791ab30724f5189cf9c00b96d162a\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F59d9333da14a4170b1d68528035be0b4\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F477749043ce24a2090e71a1ed0b8a05b\u002F0\"\u003E\u003C\u002Fp\u003E"},
+        "saleInfo": {
+            "coverUrl": "http:\u002F\u002Fpub.idqqimg.com\u002Fpc\u002Fmisc\u002Ffiles\u002F20190124\u002F6f1c452573df4751864ff6f88d0409cb.png",
+            "is_small_term": 1,
+            "classRemain": 0
+        },
+        "app": {},
+        "loaded": true,
+        "dialog": {}
+    };</script>
+<script>window.__initialCgiData = {
+        "cid": 131106,
+        "term_id": 2000027723,
+        "name": "2020春·高二语文目标211班（通用版）",
+        "type": 7,
+        "course_time_desc": "2月23日-6月21日 周日 10:30 16节",
+        "price": 112000,
+        "course_logo": "",
+        "bg_time": 1582425000,
+        "end_time": 1592714400,
+        "sign_bgtime": 1572278400,
+        "sign_endtime": 1592495999,
+        "suitable": [{"key": "适合地区", "value": ""}, {"key": "教材版本", "value": ""}, {"key": "学习阶段", "value": ""}],
+        "target": ["腾讯企鹅辅导高二春季阅读写作飞跃班立足于帮助学生提升对多种文体的阅读理解能力,对不同主题作文的驾驭能力,总结规律,传授方法,提升技巧。把握高考方向,打通阅读和写作打通,打通知识和运用,打通思维和方法,使学生在这个春季更加熟悉高考的命题规律,并打下坚实的高考应试基础,期待来日“春风得意马蹄疾,一日看尽长安花”！"],
+        "knowledge": "",
+        "subject": 6001,
+        "desc": "\u003Cp\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F657a9cbf6056484e903f9348ee0666ec\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F3f2db3d123e94137847b58e8da80e98f\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F1aa72c6ac2f043fe9199ca8b0b5720c5\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002Fcbb031c2817343a897b48310b5392acb\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F926256d701584fa3ac9a6cfb54df635b\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002Fe02786224bec49c3a1f67a5b581149e6\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F0804326b51934006b4b0cc46b128663d\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002Fcd6791ab30724f5189cf9c00b96d162a\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F59d9333da14a4170b1d68528035be0b4\u002F0\"\u003E\u003Cimg src=\"http:\u002F\u002Fp.qpic.cn\u002Fqqconadmin\u002F0\u002F477749043ce24a2090e71a1ed0b8a05b\u002F0\"\u003E\u003C\u002Fp\u003E",
+        "vid": "https:\u002F\u002F1256304549.vod2.myqcloud.com\u002Fc67f29aevodtransgzp1256304549\u002Ffe48c0785285890795822882218\u002Fv.f30.mp4",
+        "bg_color": "#8791D2",
+        "first_time": 1579104000,
+        "directory": [{
+            "title": "入学诊断考试",
+            "bgtime": 1579104000,
+            "endtime": 1593619199,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126920,
+            "cs_type": 2,
+            "exam_duration": 30,
+            "cs_room_type": 0,
+            "video_room_info": {}
+        }, {
+            "title": "【战争与和平】古诗词精讲:边塞军旅诗",
+            "bgtime": 1582425000,
+            "endtime": 1582432800,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126926,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "家长会",
+                    "bg_time": 1582425000000,
+                    "end_time": 1582425900000
+                }, {
+                    "title": "【战争与和平】古诗词精讲:边塞军旅诗",
+                    "bg_time": 1582425900000,
+                    "end_time": 1582432200000
+                }, {"title": "课后小班直播", "bg_time": 1582432200000, "end_time": 1582432800000}]
+            }
+        }, {
+            "title": "【战争与和平】文言文精讲:经典人物传记（一）",
+            "bgtime": 1583029800,
+            "endtime": 1583037600,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126932,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1583029800000,
+                    "end_time": 1583030700000
+                }, {
+                    "title": "【战争与和平】文言文精讲:经典人物传记（一）",
+                    "bg_time": 1583030700000,
+                    "end_time": 1583037000000
+                }, {"title": "课后小班直播", "bg_time": 1583037000000, "end_time": 1583037600000}]
+            }
+        }, {
+            "title": "【综合写作】高分作文核心语段",
+            "bgtime": 1583634600,
+            "endtime": 1583642400,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126937,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1583634600000,
+                    "end_time": 1583635500000
+                }, {"title": "【综合写作】高分作文核心语段", "bg_time": 1583635500000, "end_time": 1583641800000}, {
+                    "title": "课后小班直播",
+                    "bg_time": 1583641800000,
+                    "end_time": 1583642400000
+                }]
+            }
+        }, {
+            "title": "【文采与思想】现代文精讲:文学文本（一）",
+            "bgtime": 1584239400,
+            "endtime": 1584247200,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126942,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1584239400000,
+                    "end_time": 1584240300000
+                }, {
+                    "title": "【文采与思想】现代文精讲:文学文本（一）",
+                    "bg_time": 1584240300000,
+                    "end_time": 1584246600000
+                }, {"title": "课后小班直播", "bg_time": 1584246600000, "end_time": 1584247200000}]
+            }
+        }, {
+            "title": "【文采与思想】现代文精讲:文学文本（二）",
+            "bgtime": 1584844200,
+            "endtime": 1584852000,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126947,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1584844200000,
+                    "end_time": 1584845100000
+                }, {
+                    "title": "【文采与思想】现代文精讲:文学文本（二）",
+                    "bg_time": 1584845100000,
+                    "end_time": 1584851400000
+                }, {"title": "课后小班直播", "bg_time": 1584851400000, "end_time": 1584852000000}]
+            }
+        }, {
+            "title": "【豪放与婉约】文言文精讲:二十四史选读（四）",
+            "bgtime": 1585449000,
+            "endtime": 1585456800,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126952,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1585449000000,
+                    "end_time": 1585449900000
+                }, {
+                    "title": "【豪放与婉约】文言文精讲:二十四史选读（四）",
+                    "bg_time": 1585449900000,
+                    "end_time": 1585456200000
+                }, {"title": "课后小班直播", "bg_time": 1585456200000, "end_time": 1585456800000}]
+            }
+        }, {
+            "title": "【综合写作】经典素材积累与运用",
+            "bgtime": 1586658600,
+            "endtime": 1586666400,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126957,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1586658600000,
+                    "end_time": 1586659500000
+                }, {
+                    "title": "【综合写作】经典素材积累与运用",
+                    "bg_time": 1586659500000,
+                    "end_time": 1586665800000
+                }, {"title": "课后小班直播", "bg_time": 1586665800000, "end_time": 1586666400000}]
+            }
+        }, {
+            "title": "期中模拟考试",
+            "bgtime": 1587225600,
+            "endtime": 1593619199,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126962,
+            "cs_type": 2,
+            "exam_duration": 30,
+            "cs_room_type": 0,
+            "video_room_info": {}
+        }, {
+            "title": "【期中复习】期中冲刺与要点总结",
+            "bgtime": 1587263400,
+            "endtime": 1587271200,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126967,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1587263400000,
+                    "end_time": 1587264300000
+                }, {
+                    "title": "【期中复习】期中冲刺与要点总结",
+                    "bg_time": 1587264300000,
+                    "end_time": 1587270600000
+                }, {"title": "课后小班直播", "bg_time": 1587270600000, "end_time": 1587271200000}]
+            }
+        }, {
+            "title": "【豪放与婉约】古诗词精讲:送别怀人诗",
+            "bgtime": 1587868200,
+            "endtime": 1587876000,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126972,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "统考点评",
+                    "bg_time": 1587868200000,
+                    "end_time": 1587869100000
+                }, {
+                    "title": "【豪放与婉约】古诗词精讲:送别怀人诗",
+                    "bg_time": 1587869100000,
+                    "end_time": 1587875400000
+                }, {"title": "课后小班直播", "bg_time": 1587875400000, "end_time": 1587876000000}]
+            }
+        }, {
+            "title": "【个人与社会】文言文精讲:经典人物传记（二）",
+            "bgtime": 1589077800,
+            "endtime": 1589085600,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126977,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1589077800000,
+                    "end_time": 1589078700000
+                }, {
+                    "title": "【个人与社会】文言文精讲:经典人物传记（二）",
+                    "bg_time": 1589078700000,
+                    "end_time": 1589085000000
+                }, {"title": "课后小班直播", "bg_time": 1589085000000, "end_time": 1589085600000}]
+            }
+        }, {
+            "title": "【个人与社会】现代文精讲:论述类文本",
+            "bgtime": 1589682600,
+            "endtime": 1589690400,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126982,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1589682600000,
+                    "end_time": 1589683500000
+                }, {
+                    "title": "【个人与社会】现代文精讲:论述类文本",
+                    "bg_time": 1589683500000,
+                    "end_time": 1589689800000
+                }, {"title": "课后小班直播", "bg_time": 1589689800000, "end_time": 1589690400000}]
+            }
+        }, {
+            "title": "【高雅与通俗】现代文精讲:实用类文本",
+            "bgtime": 1590287400,
+            "endtime": 1590295200,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126986,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1590287400000,
+                    "end_time": 1590288300000
+                }, {
+                    "title": "【高雅与通俗】现代文精讲:实用类文本",
+                    "bg_time": 1590288300000,
+                    "end_time": 1590294600000
+                }, {"title": "课后小班直播", "bg_time": 1590294600000, "end_time": 1590295200000}]
+            }
+        }, {
+            "title": "【高雅与通俗】古诗词精讲:诗歌中的手法",
+            "bgtime": 1590892200,
+            "endtime": 1590900000,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126990,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1590892200000,
+                    "end_time": 1590893100000
+                }, {
+                    "title": "【高雅与通俗】古诗词精讲:诗歌中的手法",
+                    "bg_time": 1590893100000,
+                    "end_time": 1590899400000
+                }, {"title": "课后小班直播", "bg_time": 1590899400000, "end_time": 1590900000000}]
+            }
+        }, {
+            "title": "期末结课考试",
+            "bgtime": 1591459200,
+            "endtime": 1593619199,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126993,
+            "cs_type": 2,
+            "exam_duration": 60,
+            "cs_room_type": 0,
+            "video_room_info": {}
+        }, {
+            "title": "【语言运用】必考题型梳理",
+            "bgtime": 1591497000,
+            "endtime": 1591504800,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126996,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1591497000000,
+                    "end_time": 1591497900000
+                }, {"title": "【语言运用】必考题型梳理", "bg_time": 1591497900000, "end_time": 1591504200000}, {
+                    "title": "课后小班直播",
+                    "bg_time": 1591504200000,
+                    "end_time": 1591504800000
+                }]
+            }
+        }, {
+            "title": "【综合写作】作文整体布局",
+            "bgtime": 1592101800,
+            "endtime": 1592109600,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126997,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "课前小班直播",
+                    "bg_time": 1592101800000,
+                    "end_time": 1592102700000
+                }, {"title": "【综合写作】作文整体布局", "bg_time": 1592102700000, "end_time": 1592109000000}, {
+                    "title": "课后小班直播",
+                    "bg_time": 1592109000000,
+                    "end_time": 1592109600000
+                }]
+            }
+        }, {
+            "title": "【期末复习】期末冲刺与要点总结",
+            "bgtime": 1592706600,
+            "endtime": 1592714400,
+            "tname": "杨红子",
+            "tid": 2074380064,
+            "csid": 126998,
+            "cs_type": 0,
+            "exam_duration": 0,
+            "cs_room_type": 1,
+            "video_room_info": {
+                "default_room_mode": 0,
+                "subsection": [{
+                    "title": "结业考点评",
+                    "bg_time": 1592706600000,
+                    "end_time": 1592707500000
+                }, {"title": "【期末复习】期末冲刺与要点总结", "bg_time": 1592707500000, "end_time": 1592713800000}, {
+                    "title": "结业典礼",
+                    "bg_time": 1592713800000,
+                    "end_time": 1592714400000
+                }]
+            }
+        }],
+        "teacher": [{
+            "name": "杨红子",
+            "pic": "http:\u002F\u002Fpub.idqqimg.com\u002Fpc\u002Fmisc\u002Ffiles\u002F20180508\u002Ff826679a1bb24085a7720f60a13f96ec.jpg",
+            "tid": 2074380064,
+            "desc": "擅长把高冷深奥的知识讲得亲切可感，把复杂繁琐的知识点讲得简单明了。",
+            "good_rate": "5.0",
+            "label": "北师大本硕&5年教龄&语文解题达人",
+            "exp": "[{\"icon\":\"http:\u002F\u002Fpub.idqqimg.com\u002Fpc\u002Fmisc\u002Ffiles\u002F20180508\u002F8e0144eace714d56b47a9f5ffb3df17c.png\",\"time_slot\":\"2006年-2013年\",\"title_main\":\"北师大本硕\",\"title_ext\":\"\"},{\"icon\":\"http:\u002F\u002Fpub.idqqimg.com\u002Fpc\u002Fmisc\u002Ffiles\u002F20180508\u002F80319367a0694f5e8a0ac3ef98551584.png\",\"time_slot\":\"2016年-2018年\",\"title_main\":\"某在线教育机构\",\"title_ext\":\"明星老师，覆盖学员50万\"}]",
+            "content": "",
+            "type": "teacher"
+        }],
+        "cover_url": "http:\u002F\u002Fpub.idqqimg.com\u002Fpc\u002Fmisc\u002Ffiles\u002F20190124\u002F6f1c452573df4751864ff6f88d0409cb.png",
+        "ios_check": 0,
+        "service_qq": [3334277613],
+        "is_small_term": 1,
+        "grade": "5002",
+        "reshelf": 0,
+        "level": 1,
+        "phone_require": 1
+    };</script>
+<script>window.__initialState = window.__initialState || {}</script><!--ignore-->
+<script>window.__initialCgiData = window.__initialCgiData || {}</script><!--ignore-->
+<script>window.isSvr && (T.render = Date.now())</script> <!--ignore-->
+<script src="https://pub.idqqimg.com/pc/misc/sentry/raven.min.js?_dist" crossorigin="anonymous"></script>
+<script>window.Raven && Raven.config("https://f9704c3824294bc79c0c0206536495c2@report.url.cn/sentry/1149", {release: "zzbozheng-20200307-monitor-tdw"}).install()</script>
+<!--[if lt IE 10]>
+<script src="//7.url.cn/fudao/pc/json-polyfill_74008d.js"></script>
+<script>
+    if (!__JS_RETRY__['json-polyfill_74008d.js']) {
+        document.write(
+                '\x3Cscript type="text/javascript" src="//fudao.qq.com/pc/json-polyfill_74008d.js" retry>\x3C/script>'
+        );
+    }
+</script>
+<![endif]-->
+<script>function _typeof(e) {
+        return (_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (e) {
+            return typeof e
+        } : function (e) {
+            return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e
+        })(e)
+    }
+
+    var BJ_REPORT = function (a) {
+        if (a.BJ_REPORT) return a.BJ_REPORT;
+        var s = [], n = {}, f = {
+            id: 0,
+            uin: 0,
+            url: "",
+            combo: 1,
+            ext: null,
+            level: 4,
+            ignore: [],
+            random: 1,
+            delay: 1e3,
+            submit: null,
+            repeat: 5,
+            fulllink: !1,
+            tcode: null,
+            initPv: !0,
+            pvMsg: "!#imweb-badjs-pv#!"
+        }, r = "//badjs.qq.com/badjs", o = a.location.href, l = function (e, t) {
+            return Object.prototype.toString.call(e) === "[object " + (t || "Object") + "]"
+        }, p = function (e) {
+            return "object" === _typeof(e) && !!e
+        };
+
+        function i(e) {
+            var t = document.cookie.match(new RegExp("(^| )" + e + "=([^;]*)(;|$)"));
+            return t ? decodeURIComponent(t[2]) : ""
+        }
+
+        parseInt(i("uid_type"), 10);
+        var c = a.onerror;
+        a.onerror = function (e, t, n, r, o) {
+            var i = e;
+            o && o.stack && (i = d(o)), l(i, "Event") && (i += i.type ? "--" + i.type + "--" + (i.target ? i.target.tagName + "::" + i.target.src : "") : "");
+            var u = {msg: i, level: 4, target: t, rowNum: n, colNum: r};
+            f.jsErrorMSID && (u.ext = {msid: f.jsErrorMSID}), w.push(u), b(), c && c.apply(a, arguments)
+        };
+        var d = function (e) {
+            var t = e.stack.replace(/\n/gi, "").split(/\bat\b/).slice(0, 5).join("@").replace(/\?[^:]+/gi, ""),
+                n = e.toString();
+            return t.indexOf(n) < 0 && (t = n + "@" + t), t
+        }, m = function (e) {
+            if (!p(e)) return !0;
+            var t = e.msg;
+            return (n[t] = (parseInt(n[t], 10) || 0) + 1) > f.repeat
+        }, v = function (e, t) {
+            var n, r = [], o = [], i = [];
+            if (p(e)) {
+                if (e.level = e.level || f.level, !e.ext) {
+                    var u = null;
+                    switch (e.level) {
+                        case 1:
+                            u = f.debugMSID;
+                            break;
+                        case 2:
+                            u = f.infoMSID;
+                            break;
+                        case 4:
+                            u = f.errorMSID
+                    }
+                    u && (e.ext = {msid: u})
+                }
+                for (var a in e) {
+                    var c = e[a];
+                    if (null !== (n = c) && (l(n, "Number") || n)) {
+                        if (p(c)) try {
+                            c = JSON.stringify(c)
+                        } catch (e) {
+                            c = "[BJ_REPORT detect value stringify error] " + e.toString()
+                        }
+                        i.push(a + ":" + c), r.push(a + "=" + encodeURIComponent(c)), "id" !== a && o.push(a + "[" + t + "]=" + encodeURIComponent(c))
+                    }
+                }
+            }
+            return [o.join("&"), i.join(","), r.join("&")]
+        }, u = function (e) {
+            (new Image).src = e.replace(f.url, r)
+        }, h = function (e) {
+            setTimeout(function () {
+                !function (r) {
+                    if (f.submit) f.submit(r); else {
+                        var e = t(r);
+                        if (f.fulllink) {
+                            var o = new XMLHttpRequest;
+                            o.open("post", e.url), o.setRequestHeader("content-type", "application/json; charset=utf-8"), o.send(e.data), o.onload = function () {
+                                var e, t, n = 200 <= (t = o.status) && t <= 299 || 304 === t;
+                                if (n) try {
+                                    e = JSON.parse(o.responseText)
+                                } catch (e) {
+                                }
+                                (!n || e && "number" == typeof e.err && 0 !== e.err) && u(r)
+                            }
+                        } else u(r)
+                    }
+                }(e)
+            }, 0)
+        }, t = function (e) {
+            var t = g(e), n = (e = t[0], t[1]), r = [];
+            if (f.fulllink) {
+                for (var o = 0; o < n.msg.length; o++) {
+                    var i = {content: n.msg[o], level: +n.level[o]};
+                    if (n.ext && n.ext[o]) try {
+                        var u = JSON.parse(n.ext[o]), a = parseInt(u, 10);
+                        "number" == typeof a && a == a && (i.ext = {msid: parseInt(u, 10)})
+                    } catch (e) {
+                    }
+                    f.tcode && (i.cmd = f.tcode), r.push(i)
+                }
+                n = {id: n.id, uin: n.uin, from: n.from, msg: r}
+            }
+            return {url: e, data: JSON.stringify(n)}
+        }, g = function (e) {
+            for (var t = e.split("?"), n = t[0], r = {}, o = t[1].split("&"), i = 0; i < o.length; i++) {
+                var u = o[i].split("="), a = decodeURIComponent(u[0]), c = decodeURIComponent(u[1] || ""),
+                    s = a.match(/\[\d+]$/);
+                if (s) {
+                    var f = s[0].match(/\d+/g)[0], l = r[a = a.replace(s[0], "")] || [];
+                    l[f] = c, r[a] = l
+                } else r[a] = c
+            }
+            return [n, r]
+        }, y = [], R = 0, b = function (e) {
+            if (f.report) {
+                for (; s.length;) {
+                    var t = !1, n = s.shift();
+                    if (!m(n)) {
+                        var r = v(n, y.length);
+                        if (l(f.ignore, "Array")) for (var o = 0, i = f.ignore.length; o < i; o++) {
+                            var u = f.ignore[o];
+                            if (l(u, "RegExp") && u.test(r[1]) || l(u, "Function") && u(n, r[1])) {
+                                t = !0;
+                                break
+                            }
+                        }
+                        if (!t) {
+                            if (n.id && n.id.toString() !== f.id.toString()) {
+                                var a = (f.url || "/badjs") + "?uin=" + f.uin + "&from=" + encodeURIComponent(location.href) + "&";
+                                h(a + r[2] + "&_t=" + +new Date)
+                            } else f.combo ? y.push(r[0]) : h(f.report + r[2] + "&_t=" + +new Date);
+                            f.onReport && f.onReport(f.id, n)
+                        }
+                    }
+                }
+                if (y.length) {
+                    var c = function () {
+                        clearTimeout(R), h(f.report + y.join("&") + "&count=" + y.length + "&_t=" + +new Date), R = 0, y = []
+                    };
+                    e ? c() : R || (R = setTimeout(c, f.delay))
+                }
+            }
+        }, _ = function (e, t) {
+            var n = e;
+            return p(e) ? n.level = t : n = {msg: e, level: t}, n
+        }, I = function () {
+            var e = parseInt(f.id, 10);
+            f.report = (f.url || "/badjs") + "?id=" + e + "&uin=" + f.uin + "&from=" + encodeURIComponent(location.href) + "&"
+        }, w = {
+            push: function (e) {
+                var t = location.href;
+                if (t !== o && (w.report(), o = t, I()), Math.random() >= f.random) return w;
+                var n = p(e) ? function (t) {
+                    try {
+                        if (t.stack) {
+                            var e = t.stack.match("https?://[^\n]+"), n = (e = e ? e[0] : "").match(":(\\d+):(\\d+)");
+                            return n || (n = [0, 0, 0]), {
+                                msg: d(t),
+                                rowNum: n[1],
+                                colNum: n[2],
+                                target: e.replace(n[0], "")
+                            }
+                        }
+                        return t.name && t.message && t.description ? {msg: JSON.stringify(t)} : t
+                    } catch (e) {
+                        return t
+                    }
+                }(e) : {msg: e};
+                return f.ext && !n.ext && (n.ext = f.ext), s.push(n), b(), w
+            }, report: function (e) {
+                return e && w.push(e), b(!0), w
+            }, error: function (e) {
+                return e && (e = _(e, 4), w.push(e)), w
+            }, info: function (e) {
+                return e && (e = _(e, 2), w.push(e)), w
+            }, debug: function (e) {
+                return e && (e = _(e, 1), w.push(e)), w
+            }, pv: function () {
+                return w.info(f.pvMsg)
+            }, init: function (e) {
+                if (p(e)) for (var t in e) f[t] = e[t];
+                return parseInt(f.id, 10) && (/qq\.com$/gi.test(location.hostname) && (f.url || (f.url = r), f.uin || (f.uin = i("uin") || i("uid_uin") || i("p_luin") || i("p_uin"))), f.tcode = i("im_t_c"), I(), f.initPv && w.pv()), w
+            }, bjReq: function (e) {
+                var t = v(e, 0),
+                    n = r + "?uin=" + f.uin + "&id=" + f.id + "&from=" + encodeURIComponent(location.href) + "&";
+                (new Image).src = n + t[0]
+            }, __onerror__: a.onerror
+        };
+        if ("undefined" != typeof console && console.error && setTimeout(function () {
+            var e = ((location.hash || "").match(/([#&])BJ_ERROR=([^&$]+)/) || [])[2];
+            e && console.error("BJ_ERROR", decodeURIComponent(e).replace(/(:\d+:\d+)\s*/g, "$1\n"))
+        }, 0), window.onhashchange) {
+            var x = window.onhashchange;
+            window.onhashchange = function (e) {
+                x(e), w.pv()
+            }
+        } else window.onhashchange = function () {
+            w.pv()
+        };
+        return w
+    }(window);
+    "undefined" != typeof exports && ("undefined" != typeof module && module.exports && (exports = module.exports = BJ_REPORT), exports.BJ_REPORT = BJ_REPORT)</script>
+<script>window.BJ_REPORT.init({
+        id: 1411,
+        ignore: [/locateUsnPsw/, /Can't find variable: mqq/, /sc\.58mingtian\.cn/, /www\.skyworth-cloud\.com/, /showTips \(<anonymous>/, /“\$”未定义/, /'T' 为空或不是对象/, /语法错误/, /缺少/, /SyntaxError:/, /Unexpected identifier after numeric literal/, /\[object Object\]/, /webrtc/, /Invariant Violation: Minified React error/, /TcPlayer/, /https:\/\/pub\.idqqimg\.com\/pc\/misc\/sentry/],
+        repeat: 1,
+        fulllink: !0,
+        url: "https://fudao.qq.com/data_report/web_report",
+        jsErrorMSID: 2748908,
+        errorMSID: 2748909,
+        infoMSID: 2748910
+    });
+    var _push = window.BJ_REPORT.push;
+    window.BJ_REPORT.push = function (i) {
+        var r = Object.prototype.toString.call(i), n = "";
+        return n = window.isPack ? " [isPack] [packver: ".concat(window.packVersion, "]") : window.isSvr ? " [isSvr]" : " [isAsync]", 0 < r.indexOf("Object") ? i.msg = (i.msg || "") + n : 0 < r.indexOf("Array") ? i.map(function (i) {
+            window.BJ_REPORT.push(i)
+        }) : i += n, _push(i)
+    }</script>
+<script>!function () {
+        function o(e) {
+            var t = document.cookie.match(new RegExp("(^| )" + e + "=([^;]*)(;|$)"));
+            return t ? decodeURIComponent(t[2]) : ""
+        }
+
+        function a(e, t) {
+            return t ? e + (e.match(/\?/) ? "&" : "?") + r(t) : e
+        }
+
+        function r(e) {
+            var t = [];
+            for (var n in e) if (e.hasOwnProperty(n)) {
+                var a = void 0 !== e[n] ? e[n] : "";
+                t.push(encodeURIComponent(n) + "=" + encodeURIComponent(a))
+            }
+            return t.push("preload=1"), t.sort().join("&")
+        }
+
+        var e = {
+            query: function (e) {
+                return location.search.match(new RegExp("(\\?|&)" + e + "=([^&]*)(&|$)")) ? decodeURIComponent(RegExp.$2) : ""
+            }, routerQuery: function (e) {
+                return window.location.hash.match(new RegExp("(#|/)" + e + "/([^/]*)([/|?])")) ? decodeURIComponent(RegExp.$2) : ""
+            }, getCookie: o, _dataMap: {}, load: function (e, t) {
+                (e = function (e) {
+                    for (var t = 1; t < arguments.length; t++) for (var n in arguments[t]) arguments[t].hasOwnProperty(n) && (e[n] = arguments[t][n]);
+                    return e
+                }({
+                    type: "GET",
+                    data: {},
+                    dataType: "JSON"
+                }, e || {})).data.t = Math.random(), e.data.bkn = function (e) {
+                    if (!e) return "";
+                    for (var t = 5381, n = 0, a = e.length; n < a; ++n) t += (t << 5) + e.charAt(n).charCodeAt();
+                    return 2147483647 & t
+                }(o("skey"));
+                var n = this._key(e), a = this;
+                this._dataMap[n] = {
+                    status: "fetching",
+                    used: !1,
+                    response: null,
+                    completeCallback: t ? [t] : []
+                }, e.success = function (e, t) {
+                    a._complete(n, e, t)
+                }, e.error = function (e) {
+                    a._complete(n, {networkError: !0, retcode: e.status || 404, status: e.status || 404}, e)
+                }, this.ajax(e)
+            }, get: function (e, t) {
+                e = e || {};
+                var n = this._key(e), a = this._dataMap[n];
+                a && !a.used ? (a.used = !0, a.completeCallback.push(t), "done" === a.status && this._complete(n)) : t && t(null)
+            }, _complete: function (e, t, n) {
+                var a = this._dataMap[e];
+                a.response = t || a.response, a.xhr = n || a.xhr, a.status = "done";
+                var o = a.completeCallback;
+                a.completeCallback = [], a.used && delete this._dataMap[e];
+                for (var r = 0, s = o.length; r < s; r++) {
+                    var c = o[r];
+                    c && c(a.response, a.xhr || null)
+                }
+            }, _key: function (e) {
+                var t = (e = this._keyOptions(e)).url;
+                return t.match(/^\/[^\/]/) && (t = location.href.match(/^https?:\/\/[^\/]+/)[0] + t), a(t = t.replace(/^https?:/, ""), e.data || {}).replace(/[?&](_\w*|bkn|t)=[^&]*/g, "").replace(/[&?]/, "?")
+            }, _keyOptions: function (e) {
+                for (var t = e.url.split("?")[0], n = e.url.split("?")[1] || "", a = e.data || {}, o = n.split("&"), r = 0, s = o.length; r < s; r++) {
+                    var c = o[r].split("=");
+                    c[0] && (a[decodeURIComponent(c[0])] = decodeURIComponent(c[1] || ""))
+                }
+                return {url: t, data: a}
+            }, ajax: function (t) {
+                var e = t.url, n = new XMLHttpRequest;
+                n.onreadystatechange = function () {
+                    var e;
+                    4 === n.readyState && (200 === n.status ? (e = n.responseText || "", "JSON" === t.dataType && (e = JSON.parse(e)), t.success && t.success(e, n)) : t.error && t.error(n))
+                }, "GET" === t.type ? (e = a(e, t.data || {pq: 1}), n.open("GET", e, !0)) : n.open("POST", e, !0), "timeout" in n && (n.timeout = t.timeout || 1e4), (t.contentType || "POST" === t.type) && n.setRequestHeader("Content-Type", t.contentType || "application/x-www-form-urlencoded"), n.send("GET" === t.type ? null : r(t.data || {pq: 1}))
+            }
+        };
+        window.Preload = e
+    }()</script><!--ignore-->
+<script>!function () {
+        if (window.Preload) {
+            var e = "/cgi-proxy/courseLogic/courseDynamicDetail", r = window.Preload, o = {
+                subpayCode: r.query("subpay_code"),
+                cid: r.query("course_id"),
+                coupon: r.query("coupon") || "",
+                forward: r.query("forward") || "",
+                platform: 1
+            };
+            if (r.timeStart || (r.timeStart = {}), r.timeStart[e] = (new Date).getTime(), r.load({
+                url: e,
+                data: o
+            }), !window.isSvr) {
+                var a = "/cgi-proxy/courseLogic/courseStaticDetail";
+                r.timeStart[a] = (new Date).getTime(), r.load({url: a, data: o})
+            }
+        }
+    }()</script>
+<script>T.mainStart = Date.now(), window.keyCgi = "", window.pageSpeedId = "22111-1-3"</script>
+<!--RESOURCEMAP_PLACEHOLDER-->
+<script></script> <!--SCRIPT-->
+<script id="imweb-webpack-retry-tail"></script>
+<script>T.mainEnd = Date.now(), window.BJ_REPORT && BJ_REPORT.info("PV：" + location.pathname)</script>
+<script src="//7.url.cn/fudao/pc/assets/js/runtime_978efd2c.js" crossOrigin="anonymous"></script>
+<script>if (!__JS_RETRY__["runtime_978efd2c.js"]) {
+        document.write('\x3Cscript type="text/javascript" src="//fudao.qq.com/pc/assets/js/runtime_978efd2c.js" retry>\x3C/script>');
+    }</script>
+<script src="//7.url.cn/fudao/pc/assets/js/polyfill_75323124.js" crossOrigin="anonymous"></script>
+<script>if (!__JS_RETRY__["polyfill_75323124.js"]) {
+        document.write('\x3Cscript type="text/javascript" src="//fudao.qq.com/pc/assets/js/polyfill_75323124.js" retry>\x3C/script>');
+    }</script>
+<script src="//7.url.cn/fudao/pc/assets/js/vendor_0b3cd4fd.js" crossOrigin="anonymous"></script>
+<script>if (!__JS_RETRY__["vendor_0b3cd4fd.js"]) {
+        document.write('\x3Cscript type="text/javascript" src="//fudao.qq.com/pc/assets/js/vendor_0b3cd4fd.js" retry>\x3C/script>');
+    }</script>
+<script src="//7.url.cn/fudao/pc/assets/js/react_510f92c9.js" crossOrigin="anonymous"></script>
+<script>if (!__JS_RETRY__["react_510f92c9.js"]) {
+        document.write('\x3Cscript type="text/javascript" src="//fudao.qq.com/pc/assets/js/react_510f92c9.js" retry>\x3C/script>');
+    }</script>
+<script src="//7.url.cn/fudao/pc/assets/js/common_cf8f0f04.js" crossOrigin="anonymous"></script>
+<script>if (!__JS_RETRY__["common_cf8f0f04.js"]) {
+        document.write('\x3Cscript type="text/javascript" src="//fudao.qq.com/pc/assets/js/common_cf8f0f04.js" retry>\x3C/script>');
+    }</script>
+<script src="//7.url.cn/fudao/pc/assets/js/5_e9f17ffa.js" crossOrigin="anonymous"></script>
+<script>if (!__JS_RETRY__["5_e9f17ffa.js"]) {
+        document.write('\x3Cscript type="text/javascript" src="//fudao.qq.com/pc/assets/js/5_e9f17ffa.js" retry>\x3C/script>');
+    }</script>
+<script src="//7.url.cn/fudao/pc/assets/js/course_c0c9d377.js" crossOrigin="anonymous"></script>
+<script>if (!__JS_RETRY__["course_c0c9d377.js"]) {
+        document.write('\x3Cscript type="text/javascript" src="//fudao.qq.com/pc/assets/js/course_c0c9d377.js" retry>\x3C/script>');
+    }</script>
+<script>"use strict";
+    var __register__sw__ = {
+            monitor: {support: 2748927, notSupport: 2748928, toHitCache: 2748929, hitCache: 2748930},
+            checkSwStatusUrl: "https://sas.qq.com/cgi-bin/fudao_config_swRegisterPcWeb",
+            autoRefresh: !1
+        }, report = function () {
+            var c = "https://cgi.connect.qq.com/report/report_vm", r = 1e3, a = [];
+            return function (t, e) {
+                var o;
+                t && ((o = t) && "[object Array]" === Object.prototype.toString.call(o) ? Object.keys(t).forEach(function (o) {
+                    t[o] && a.push({id: t[o], msg: e})
+                }) : a.push({id: t, msg: e}), setTimeout(function () {
+                    !function () {
+                        var o = new Image;
+                        o.onload = o.onerror = function () {
+                            o = null
+                        };
+                        for (var t = [], e = [], r = 0; r < a.length; r++) {
+                            var n = a[r], i = n.id, s = n.msg;
+                            t.push(i), e.push(s)
+                        }
+                        0 < a.length && (o.src = c + "?monitors=[" + t.join(",") + "]&_=" + e.join(",").substr(0, 1e3) + "&t=" + Math.random()), a = []
+                    }()
+                }, r))
+            }
+        }(), checkSwStatusUrl = __register__sw__.checkSwStatusUrl, monitor = __register__sw__.monitor,
+        autoRefresh = __register__sw__.autoRefresh;
+    "serviceWorker" in navigator ? (monitor && monitor.support && report(monitor.support), window.addEventListener("DOMContentLoaded", function () {
+        var e = navigator.serviceWorker;
+        e.register("/pc/sw.js").then(function (t) {
+            if (window.BJ_REPORT && window.BJ_REPORT.info("sw注册成功"), t.onupdatefound = function () {
+                var o = t.installing;
+                o.onstatechange = function () {
+                    "activated" === o.state && e.controller && (autoRefresh && window.location.reload(!0), console.log("New content is available; please refresh."))
+                }
+            }, checkSwStatusUrl) {
+                !function o() {
+                    fetch(checkSwStatusUrl).then(function (o) {
+                        return o.json()
+                    }).then(function (o) {
+                        e.controller && e.controller.postMessage(o)
+                    }), setTimeout(o, 3e5)
+                }()
+            }
+            console.log("ServiceWorker registration successful with scope: ", t.scope)
+        }).catch(function (o) {
+            console.log("ServiceWorker registration failed: ", o);
+            var t = window.BJ_REPORT;
+            t && (t.info("sw注册失败"), t.info("sw register error:" + o.message))
+        })
+    })) : monitor && monitor.notSupport && report(monitor.notSupport);</script>
+</body>
+</html>

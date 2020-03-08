@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>result</title>
+</head>
+<body>
+
+<div id="app">
+</div>
+
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script>
+    // js代码
+    const input = {"Identifier":"terry","signature":"bab71ca3bc9488e30d6ab9b0fcde4418","data_str":"4534253453252345353534253453245342"};
+
+    var final
+
+    function js_method(subject) {
+        alert(subject)
+    }
+
+        $.ajax({
+            url:"http://localhost:8000/srv_post",
+            type:"POST",
+            data:JSON.stringify(input),
+            contentType:"application/json",
+            success: function(result){
+                $("#app").append("<p>今天的课程如下<\p>")
+                for (var subject in result.data) {
+                    console.log(subject)
+                    var num =result.data[subject].length
+                    var str='<a href="#"'+' id="'+subject+'" onclick="js_method('+subject+')">'+num+ subject+'  <\a>'
+                    console.log(subject)
+                   $("#app").append(str)
+                }
+            },
+            fail: function (err) {
+                console.log(err)
+            }
+
+        })
+
+
+    // $.post("http://localhost:8000/srv_post",{
+    //     "Identifier":"terry",
+    //     "signature":"bab71ca3bc9488e30d6ab9b0fcde4418",
+    //     "data_str":"4534253453252345353534253453245342"
+    // },function( data ) {
+    //     alert(data)
+    // }, "json");
+
+
+
+
+</script>
+</body>
+</html>
