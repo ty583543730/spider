@@ -49,7 +49,7 @@ type Data struct {
 }
 
 var courseList []CourseDetail1
-var CourseMap = make(map[string][]CourseDetail1)
+var CourseMap = make(map[int]map[string][]CourseDetail1)
 
 type CourseDetail1 struct {
 	CourseId          int    `json:"course_id"`
@@ -85,7 +85,7 @@ func srvHandlerPost(c *gin.Context) {
 			"status": status,
 			"data":   CourseMap,
 		})
-		CourseMap=map[string][]CourseDetail1{}
+		CourseMap=map[int]map[string][]CourseDetail1{}
 		courseList=[]CourseDetail1{}
 	}(c, &code)
 
@@ -163,14 +163,15 @@ func getDbConnect1() *sql.DB {
 func getCourseDayByDay() {
 	timeStr := time.Now().Format("2006-01-02")
 	t, _ := time.Parse("2006-01-02", timeStr)
-	timeToday := t.Unix()
+	timeToday := t.Unix()-3600*8
 
 	//可以根据请求定制化查多少天的数据
-	tenDaysAgo := timeToday  - 3600*8
-	tenDaysAfter := timeToday + 86400
+	//先写死成前后5天吧
+	fiveDaysAgo := timeToday - 86400*5
+	fiveDaysAfter := timeToday + 86400*5
 	db1 = getDbConnect1()
 	//查询前后二天的课程，每天每天返回
-	rows, err := db1.Query("select course_id,url,father_title,subject,`time`,teacher_name,price,child_title,bg_time,teacher_name_detail,add_time from courses where bg_time >= ? and bg_time< ? ", tenDaysAgo, tenDaysAfter)
+	rows, err := db1.Query("select course_id,url,father_title,subject,`time`,teacher_name,price,child_title,bg_time,teacher_name_detail,add_time from courses where bg_time >= ? and bg_time< ? ", fiveDaysAgo, fiveDaysAfter)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -189,12 +190,21 @@ func getCourseDayByDay() {
 		log.Fatal(err)
 	}
 
+	var day int
 	for i:=0;i<len(courseList);i++{
-		if _, ok := CourseMap[courseList[i].Subject]; !ok {
-			fmt.Println(courseList[i].Subject)
-			CourseMap[courseList[i].Subject]=make([]CourseDetail1,0)
+
+		if int64(courseList[i].BgTime)-timeToday>=0{
+			day=int((int64(courseList[i].BgTime)-timeToday)/86400)
+		}else {
+			day=int((int64(courseList[i].BgTime)-timeToday)/86400)-1
 		}
-		CourseMap[courseList[i].Subject]=append(CourseMap[courseList[i].Subject],courseList[i])
+		if _, ok := CourseMap[day]; !ok {
+			CourseMap[day]=make(map[string][]CourseDetail1,0)
+		}
+		if _, ok := CourseMap[day][courseList[i].Subject]; !ok {
+			CourseMap[day][courseList[i].Subject]=make([]CourseDetail1,0)
+		}
+		CourseMap[day][courseList[i].Subject]=append(CourseMap[day][courseList[i].Subject],courseList[i])
 	}
 }
 func StartSrv() {

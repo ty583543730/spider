@@ -1,46 +1,122 @@
+
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>result</title>
+    <style>
+        #app{ text-align: center;}
+    </style>
 </head>
 <body>
 
 <div id="app">
+    <p>今天的课程如下</p>
+    <div class="table"></div>
+    <div class="detail"></div>
 </div>
-
 <script type="text/javascript" src="./jquery.min.js"></script>
 <script>
     // js代码
     const input = {"Identifier":"terry","signature":"bab71ca3bc9488e30d6ab9b0fcde4418","data_str":"4534253453252345353534253453245342"};
+    Date.prototype.format = function (fmt) { // 格式化时间函数
+        let o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (let k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
 
-    var final
-
-    function js_method(subject) {
-        alert(subject)
-    }
-
-        $.ajax({
-            url:"http://localhost:8000/srv_post",
-            type:"POST",
-            data:JSON.stringify(input),
-            contentType:"application/json",
-            success: function(result){
-                $("#app").append("<p>今天的课程如下<\p>")
-                for (var subject in result.data) {
-                    console.log(subject)
-                    var num =result.data[subject].length
-                    var str='<a href="#"'+' id="'+subject+'" onclick="js_method('+subject+')">'+num+ subject+'  <\a>'
-                    console.log(subject)
-                   $("#app").append(str)
+    $.ajax({
+        url:"http://localhost:8000/srv_post",
+        type:"POST",
+        data:JSON.stringify(input),
+        contentType:"application/json",
+        success: function(result){
+            var courseHTML = []
+            var courseArr = [] // 课程key值与名字一一对应关系
+            var date = {} // 时间key值与名字一一对应关系
+            courseHTML.push("<table style='width:100%''>")
+            for (var key in result.data) { // 循环获取所有内容
+                if (!date[key]) {
+                    var time = new Date(new Date().getTime() + Number(key) * 24 * 60 * 60 * 1000).format("yyyy-MM-dd")
+                    date[key] = time
                 }
-            },
-            fail: function (err) {
-                console.log(err)
+                for (var course in result.data[key]) { // 循环获取所有课程
+                    if (courseArr.indexOf(course) === -1) {
+                        courseArr.push(course)
+                    }
+                }
             }
+            // 表头创建
+            courseHTML.push("<thead><tr><th>时间</th>")
+            for (var i = 0; i < courseArr.length; i++) { // 循环课程
+                courseHTML.push("<th>" + courseArr[i] + "</th>")
+            }
+            courseHTML.push("</tr></thead>")
+            // 表头创建end
+            // 表格内容
+            courseHTML.push("<tbody>")
+            for (var key in result.data) { // 循环获取所有内容
+                courseHTML.push("<tr>")
+                courseHTML.push("<th>" + date[key] + "</th>")
+                for (var i = 0; i < courseArr.length; i++) { // 循环课程
+                    var course = courseArr[i]
+                    if (result.data[key][course]) { // 当前课程存在
+                        courseHTML.push("<th><a data-time='" + key + "' data-course='" + course + "'>" + result.data[key][course].length + "</a></th>")
+                    } else {
+                        courseHTML.push("<th>" + 0 + "</th>")
+                    }
+                }
+            }
+            courseHTML.push("</tbody></table>")
+            $('.table').html(courseHTML.join(''))
+            $("#app tbody a").on( "click", function() {
+                var time = $(this).attr('data-time')
+                var course = $(this).attr('data-course')
+                var listHtml = []
+                for(var i = 0; i < result.data[time][course].length; i++) {
+                    var item = result.data[time][course][i]
+                    var date = new Date(Number(item.bgtime * 1000)).format('yyyy-MM-dd')
+                    listHtml.push("<p><a href='" + item.url + "' target='_blank'>" + item.title + "    " + item.tname + "    " + date + "</a></p>")
+                }
+                $('.detail').html(listHtml.join(''))
+            });
+        },
+        fail: function (err) {
+            console.log(err)
+        }
 
-        })
+    })
 
+    // $.ajax({
+    //     url:"http://localhost:8000/srv_post",
+    //     type:"POST",
+    //     data:JSON.stringify(input),
+    //     contentType:"application/json",
+    //     success: function(result){
+    //         $("#app").append("<p>今天的课程如下<\p>")
+    //         for (var subject in result.data) {
+    //             console.log(subject)
+    //             var num =result.data[subject].length
+    //             var str='<a href="#"'+' id="'+subject+'" onclick="js_method('+subject+')">'+num+ subject+'  <\a>'
+    //             console.log(subject)
+    //             $("#app").append(str)
+    //         }
+    //     },
+    //     fail: function (err) {
+    //         console.log(err)
+    //     }
+
+    // })
 
     // $.post("http://localhost:8000/srv_post",{
     //     "Identifier":"terry",
@@ -49,9 +125,6 @@
     // },function( data ) {
     //     alert(data)
     // }, "json");
-
-
-
 
 </script>
 </body>
