@@ -171,7 +171,7 @@ func getCourseDayByDay() {
 	fiveDaysAfter := timeToday + 86400*5
 	db1 = getDbConnect1()
 	//查询前后二天的课程，每天每天返回
-	rows, err := db1.Query("select course_id,url,father_title,subject,`time`,teacher_name,price,child_title,bg_time,teacher_name_detail,add_time from courses where bg_time >= ? and bg_time< ? ", fiveDaysAgo, fiveDaysAfter)
+	rows, err := db1.Query("select course_id,url,father_title,subject,`time`,teacher_name,price,child_title,bg_time,teacher_name_detail,add_time from courses where bg_time >= ? and bg_time< ?  group by course_id", fiveDaysAgo, fiveDaysAfter)
 	if err != nil {
 		log.Fatal(err)
 	}
